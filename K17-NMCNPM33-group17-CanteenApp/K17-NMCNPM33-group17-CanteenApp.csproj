@@ -125,5 +125,14 @@
   <ItemGroup>
     <Resource Include="Images\printer-order.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\shopping-cart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\statistics.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\edit-menu.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

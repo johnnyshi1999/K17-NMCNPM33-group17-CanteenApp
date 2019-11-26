@@ -17,9 +17,9 @@ namespace K17_NMCNPM33_group17_CanteenApp
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class Statistic : Window
     {
-        public Window1()
+        public Statistic()
         {
             InitializeComponent();
         }
