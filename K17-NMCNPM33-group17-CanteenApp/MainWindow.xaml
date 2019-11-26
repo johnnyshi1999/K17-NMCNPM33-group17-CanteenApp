@@ -5,8 +5,101 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:K17_NMCNPM33_group17_CanteenApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="1054" Width="1440">
+    <Window.Resources>
+        <Style x:Key="SmallText" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="22"/>
+        </Style>
+
+        <Style x:Key="RedFormatButton" TargetType="{x:Type Button}">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="30" Background="#DF0000" BorderThickness="0" Padding="2">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                       
+                    </ControlTemplate>
+                </Setter.Value>
+
+            </Setter>
+        </Style>
+               
+    </Window.Resources>
+
+    <Canvas Height="1024" Width="1440">
+        <Canvas Name ="MainCanvas" Canvas.Left="98" Canvas.Top="98"  Height="896" Width="1336">
+            <Border Background="#F3F3F3" Width="664" Height="765" Canvas.Left="56" Canvas.Top="134" 
+                       BorderBrush="Black" BorderThickness="2" CornerRadius="30">
+                <Canvas>
+                    <TextBlock Text="Danh sách sản phẩm" TextWrapping="Wrap" 
+                               Style="{DynamicResource SmallText}"
+                               RenderTransformOrigin="0.865,1.962" Canvas.Left="40" Canvas.Top="26"/>
+                    <Grid Name="OrderList" Width="555" ShowGridLines="True"
+                          Canvas.Left="40" Canvas.Top="87" Height="439">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center" Text="Tên"
+                                   Grid.Column="0" Grid.Row="0"/>
+
+                        <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center" Text="Giá"
+                                   Grid.Column="1" Grid.Row="0"/>
+
+                        <TextBlock Style="{DynamicResource SmallText}"  HorizontalAlignment="Center" Text="Số lượng"
+                                   Grid.Column="2" Grid.Row="0"/>
+
+                        <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center" Padding="0,5,0,0" Text="Tổng"
+                                   Grid.Column="3" Grid.Row="0"/>
+
+                    </Grid>
+                </Canvas>
+
+
+            </Border>
+
+            <Border Background="#F3F3F3" Width="664" Height="116" Canvas.Left="56" Canvas.Top="7" 
+                       BorderBrush="Black" BorderThickness="2" CornerRadius="30">
+                <StackPanel Name="EditOrderStackPanel" Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+
+                    <Button Name="NewOrderButton" Style="{DynamicResource RedFormatButton}" Margin="10,0,10,0"
+                            Width="207" Height="62">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Images/new-order.png"
+                                   RenderOptions.BitmapScalingMode="Fant"/>
+                            <TextBlock Text="Tạo order" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Name="DeleteOrderButton" Style="{DynamicResource RedFormatButton}"  Margin="10,0,10,0"
+                            Width="207" Height="62">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Images/delete-order.png"
+                                   RenderOptions.BitmapScalingMode="Fant"/>
+                            <TextBlock Text="Xóa order" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+            </Border>
+
+            <Border Background="#F3F3F3" Width="518" Height="626" Canvas.Left="766" Canvas.Top="7" 
+                       BorderBrush="Black" BorderThickness="2" CornerRadius="30"></Border>
+
+            <Border Background="#F3F3F3" Width="532" Height="224" Canvas.Left="766" Canvas.Top="672" 
+                       BorderBrush="Black" BorderThickness="2" CornerRadius="30"></Border>
+
+        </Canvas>
+
+    </Canvas>
 </Window>
