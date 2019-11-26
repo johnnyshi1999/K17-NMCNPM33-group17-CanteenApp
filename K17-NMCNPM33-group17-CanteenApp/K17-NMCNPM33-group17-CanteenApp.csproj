@@ -100,5 +100,23 @@
   <ItemGroup>
     <Resource Include="Images\delete-order.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\undo-order.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\redo-order.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\search-product.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\plus-sign.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\minus-sign.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\printer-order.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
