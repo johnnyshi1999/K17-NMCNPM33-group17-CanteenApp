@@ -5,16 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:K17_NMCNPM33_group17_CanteenApp"
         mc:Ignorable="d"
-        Title="Statistics" Height="1054" Width="1440">
+        Title="MainWindow" Height="1054" Width="1440">
     <Window.Resources>
+        <Style x:Key="SectionBorder" TargetType="{x:Type Border }">
+            <Setter Property="Background" Value="#F3F3F3"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="CornerRadius" Value="30"/>
+        </Style>
+
         <Style x:Key="SmallText" TargetType="{x:Type TextBlock}">
             <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+
+        </Style>
+
+        <Style x:Key="MediumText" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+
+        </Style>
+
+        <Style x:Key="LargeText" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontWeight" Value="Bold"/>
         </Style>
 
         <Style x:Key="RedFormatButton" TargetType="{x:Type Button}">
             <Setter Property="FontSize" Value="25"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="FontWeight" Value="Medium"/>
             <Setter Property="FontStyle" Value="Italic"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -29,75 +53,109 @@
             </Setter>
         </Style>
 
+        <Style x:Key="BlueFormatButton" TargetType="{x:Type Button}">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="30" Background="#183557" BorderThickness="0" Padding="2">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+
+                    </ControlTemplate>
+                </Setter.Value>
+
+            </Setter>
+        </Style>
+
     </Window.Resources>
+
 
     <Canvas Height="1024" Width="1440">
         <Canvas Name ="MainCanvas" Canvas.Left="98" Canvas.Top="98"  Height="896" Width="1336">
-            <Border Background="#F3F3F3" Width="664" Height="765" Canvas.Left="56" Canvas.Top="134" 
-                       BorderBrush="Black" BorderThickness="2" CornerRadius="30">
-                <Canvas>
-                    <TextBlock Text="Danh sách sản phẩm" TextWrapping="Wrap" 
-                               Style="{DynamicResource SmallText}"
-                               RenderTransformOrigin="0.865,1.962" Canvas.Left="40" Canvas.Top="26"/>
-                    <Grid Name="OrderList" Width="555" ShowGridLines="True"
-                          Canvas.Left="40" Canvas.Top="87" Height="439">
 
+            <Border Background="#F3F3F3" Width="1314" Height="756" Canvas.Left="-30" 
+                       BorderBrush="Black" BorderThickness="2" CornerRadius="30" Canvas.Top="-54">
+                <Canvas>
+                    <TextBlock Text="Ngày" Style="{DynamicResource MediumText}" Canvas.Left="689" Canvas.Top="57" RenderTransformOrigin="1.031,-0.547"></TextBlock>
+                    <TextBox Width="382" Height="60" Canvas.Left="782" Canvas.Top="30"></TextBox>
+                    <DataGrid HorizontalAlignment="Center" AutoGenerateColumns="False" 
+                              Name="dgUsers"
+                              ScrollViewer.CanContentScroll="True"         
+
+                              ScrollViewer.IsDeferredScrollingEnabled="True" 
+
+                              ScrollViewer.HorizontalScrollBarVisibility="Visible" SelectionChanged="DataGrid_SelectionChanged_1" Width="1126" Height="403" Canvas.Left="64" Canvas.Top="114" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Giao dịch" Binding="{Binding ID}"  Width="200"/>
+                            <DataGridTextColumn Header="Nhân viên" Binding="{Binding Name}" Width="200" />
+                            <DataGridTextColumn Header="Số tiền" Binding="{Binding Money}" Width="250" />
+                            <DataGridTextColumn Header="Thời gian" Binding="{Binding Time}" Width="160" />
+                            <DataGridTextColumn Header="Ngày giao dịch" Binding="{Binding Date}" Width="300" />
+
+
+                        </DataGrid.Columns>
+
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="FontWeight"  Value="Bold" />
+                                <Setter Property="FontSize"  Value="33" />
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+                    </DataGrid>
+
+                    <Grid Name="Sumary" Width="600"
+                         Height="120" Canvas.Left="44" Canvas.Top="540">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="4*" />
-                            <ColumnDefinition Width="2*" />
                             <ColumnDefinition Width="2*" />
                             <ColumnDefinition Width="3*" />
+
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center" Text="Tên"
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Style="{DynamicResource LargeText}"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" Text="Tổng doanh thu"
                                    Grid.Column="0" Grid.Row="0"/>
 
-                        <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center" Text="Giá"
-                                   Grid.Column="1" Grid.Row="0"/>
-
-                        <TextBlock Style="{DynamicResource SmallText}"  HorizontalAlignment="Center" Text="Số lượng"
-                                   Grid.Column="2" Grid.Row="0"/>
-
-                        <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center" Padding="0,5,0,0" Text="Tổng"
-                                   Grid.Column="3" Grid.Row="0"/>
+                        <TextBlock Style="{DynamicResource LargeText}" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" Text="Số giao dịch"
+                                   Grid.Column="0" Grid.Row="1"/>
 
                     </Grid>
+                    <Button Name="RedoButton" Style="{DynamicResource BlueFormatButton}"
+                            Width="62" Height="62" Canvas.Left="1102" Canvas.Top="558">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Images/redo-order.png" Margin="5"
+                                   RenderOptions.BitmapScalingMode="Fant"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Name="UndoButton" Style="{DynamicResource BlueFormatButton}"
+                            Width="62" Height="62" Canvas.Left="986" Canvas.Top="558">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Images/undo-order.png" Margin="5"
+                                   RenderOptions.BitmapScalingMode="Fant"/>
+                        </StackPanel>
+                    </Button>
+
                 </Canvas>
-
-
             </Border>
-
-            <Border Background="#F3F3F3" Width="664" Height="116" Canvas.Left="56" Canvas.Top="7" 
-                       BorderBrush="Black" BorderThickness="2" CornerRadius="30">
-                <StackPanel Name="EditOrderStackPanel" Orientation="Horizontal"
-                            HorizontalAlignment="Center">
-
-                    <Button Name="NewOrderButton" Style="{DynamicResource RedFormatButton}" Margin="10,0,10,0"
-                            Width="207" Height="62">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="Images/new-order.png"
-                                   RenderOptions.BitmapScalingMode="Fant"/>
-                            <TextBlock Text="Tạo order" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </Button>
-
-                    <Button Name="DeleteOrderButton" Style="{DynamicResource RedFormatButton}"  Margin="10,0,10,0"
-                            Width="207" Height="62">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="Images/delete-order.png"
-                                   RenderOptions.BitmapScalingMode="Fant"/>
-                            <TextBlock Text="Xóa order" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </Button>
-
+            <Button Style="{DynamicResource RedFormatButton}"
+                                Width="300" Height="70" Canvas.Left="905" Canvas.Top="596">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Images/printer-order.png" RenderOptions.BitmapScalingMode="Fant"/>
+                    <TextBlock Text="In Doanh thu" Padding="5,0,0,0" VerticalAlignment="Center"/>
                 </StackPanel>
-            </Border>
-
-            <Border Background="#F3F3F3" Width="518" Height="626" Canvas.Left="766" Canvas.Top="7" 
-                       BorderBrush="Black" BorderThickness="2" CornerRadius="30"></Border>
-
-            <Border Background="#F3F3F3" Width="532" Height="224" Canvas.Left="766" Canvas.Top="672" 
-                       BorderBrush="Black" BorderThickness="2" CornerRadius="30"></Border>
+            </Button>
 
         </Canvas>
 
