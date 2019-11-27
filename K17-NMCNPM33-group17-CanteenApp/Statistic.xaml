@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:K17_NMCNPM33_group17_CanteenApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1054" Width="1440">
+        Title="Statistics" Height="1054" Width="1440">
     <Window.Resources>
         <Style x:Key="SmallText" TargetType="{x:Type TextBlock}">
             <Setter Property="FontSize" Value="22"/>
