@@ -227,11 +227,11 @@
                             </StackPanel>
                         </Border>
 
-                        <Border Style="{DynamicResource SectionBorder}" Width="518" Height="626" Canvas.Left="766" Canvas.Top="7" 
+                        <Border Style="{DynamicResource SectionBorder}" Width="542" Height="626" Canvas.Left="743" Canvas.Top="7" 
                        >
 
                             <Canvas x:Name="FastSearch">
-                                <TextBlock Text="Tìm nhanh" Style="{DynamicResource MediumText}" Canvas.Left="37" Canvas.Top="24"/>
+                                <TextBlock Text="Tìm kiếm" Style="{DynamicResource MediumText}" Canvas.Left="37" Canvas.Top="24"/>
                                 <TextBox Width="382" Height="60" Canvas.Left="37" Canvas.Top="62"/>
                                 <Button x:Name="SearchButton" Style="{DynamicResource BlueFormatButton}"
                             Width="62" Height="62" RenderTransformOrigin="6.126,1.348" Canvas.Left="424" Canvas.Top="62">
@@ -269,33 +269,33 @@
                             </Canvas>
                         </Border>
 
-                        <Border Style="{DynamicResource SectionBorder}" Width="532" Height="244" Canvas.Left="766" Canvas.Top="652" 
+                        <Border Style="{DynamicResource SectionBorder}" Width="555" Height="234" Canvas.Left="743" Canvas.Top="662" 
                        >
                             <Canvas x:Name="Overview" Margin="0.4,38.4,-0.4,-0.4">
                                 <Border
                             Background="White"
-                        BorderBrush="Black" BorderThickness="2" CornerRadius="30" Canvas.Left="35" Canvas.Top="-19" Height="139" Width="454">
+                        BorderBrush="Black" BorderThickness="2" CornerRadius="30" Canvas.Left="35" Canvas.Top="-15" Height="110" Width="454">
                                     <Canvas>
-                                        <TextBlock Text="Số thứ tự" Style="{DynamicResource MediumText}" Canvas.Left="69" Canvas.Top="18"/>
-                                        <TextBlock Text="Ngày" Style="{DynamicResource MediumText}" Canvas.Left="69" Canvas.Top="86" RenderTransformOrigin="1.031,-0.547"/>
-                                        <TextBlock x:Name ="DateTextBlock" Text="2/12/2019" Style="{DynamicResource MediumText}" Canvas.Left="255" Canvas.Top="86" RenderTransformOrigin="0.526,1.173"/>
+                                        <TextBlock Text="Số thứ tự" Style="{DynamicResource MediumText}" Canvas.Left="69" Canvas.Top="16"/>
+                                        <TextBlock Text="Ngày" Style="{DynamicResource MediumText}" Canvas.Left="69" Canvas.Top="63" RenderTransformOrigin="1.031,-0.547"/>
+                                        <TextBlock x:Name ="DateTextBlock" Text="2/12/2019" Style="{DynamicResource MediumText}" Canvas.Left="255" Canvas.Top="69" RenderTransformOrigin="0.526,1.173"/>
                                         <TextBox Height="42" Width="43" Text="30" FontSize="25" 
                                          VerticalAlignment="Center" HorizontalAlignment="Center"
-                                         Canvas.Left="281" Canvas.Top="20"/>
+                                         Canvas.Left="280" Canvas.Top="19"/>
                                         <Button x:Name="IncreaseNumerButton"
-                                        Width="45" Height="45" Style="{DynamicResource BlueFormatButton}" Canvas.Left="344" Canvas.Top="17">
+                                        Width="45" Height="45" Style="{DynamicResource BlueFormatButton}" Canvas.Left="348" Canvas.Top="16">
                                             <Image Source="Images/plus-sign.png" RenderOptions.BitmapScalingMode="Fant"/>
                                         </Button>
 
                                         <Button x:Name="DecreaseNumerButton"
-                                        Width="45" Height="45" Style="{DynamicResource BlueFormatButton}" Canvas.Left="214" Canvas.Top="18">
+                                        Width="45" Height="45" Style="{DynamicResource BlueFormatButton}" Canvas.Left="208" Canvas.Top="16">
                                             <Image Source="Images/minus-sign.png" RenderOptions.BitmapScalingMode="Fant"/>
                                         </Button>
                                     </Canvas>
                                 </Border>
 
                                 <Button Style="{DynamicResource RedFormatButton}"
-                                Width="207" Height="62" Canvas.Left="49" Canvas.Top="130">
+                                Width="207" Height="62" Canvas.Left="50" Canvas.Top="113">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="Images/printer-order.png" RenderOptions.BitmapScalingMode="Fant"/>
                                         <TextBlock Text="In Order" Padding="5,0,0,0" VerticalAlignment="Center"/>
@@ -303,7 +303,7 @@
                                 </Button>
 
                                 <Button Style="{DynamicResource RedFormatButton}"
-                                Width="207" Height="62" Canvas.Left="282" Canvas.Top="130">
+                                Width="207" Height="62" Canvas.Left="282" Canvas.Top="113">
                                     <TextBlock Text="Chuyển cho bếp" VerticalAlignment="Center"/>
                                 </Button>
                             </Canvas>
@@ -311,22 +311,6 @@
 
                     </Canvas>
 
-                </TabItem>
-
-                <TabItem>
-                    <TabItem.Header>
-                        <Image Source="Images/search-product.png"
-                               Margin="15"
-                               RenderOptions.BitmapScalingMode="Fant"></Image>
-                    </TabItem.Header>
-                </TabItem>
-
-                <TabItem>
-                    <TabItem.Header>
-                        <Image Source="Images/edit-menu.png"
-                               Margin="10"
-                               RenderOptions.BitmapScalingMode="Fant"></Image>
-                    </TabItem.Header>
                 </TabItem>
 
                 <TabItem>
@@ -425,7 +409,7 @@
                     </Canvas>
                 </TabItem>
             </TabControl>
-            
+
 
         </Canvas>
     </ScrollViewer>
