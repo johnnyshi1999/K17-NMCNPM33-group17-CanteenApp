@@ -335,6 +335,94 @@
                                Margin="10"
                                RenderOptions.BitmapScalingMode="Fant"></Image>
                     </TabItem.Header>
+
+                    <Canvas Height="1024" Width="1440">
+                        <Canvas  Canvas.Left="98" Canvas.Top="98"  Height="896" Width="1336">
+
+                            <Border Background="#F3F3F3" Width="1235" Height="756" Canvas.Left="-30" 
+                       BorderBrush="Black" BorderThickness="2" CornerRadius="30" Canvas.Top="-54">
+                                <Canvas>
+                                    <TextBlock Text="Ngày" Style="{DynamicResource MediumText}" Canvas.Left="689" Canvas.Top="57" RenderTransformOrigin="1.031,-0.547"></TextBlock>
+                                    <TextBox Width="382" Height="60" Canvas.Left="782" Canvas.Top="30"></TextBox>
+                                    <DataGrid HorizontalAlignment="Center" AutoGenerateColumns="False" 
+                              Name="dgUsers"
+                              ScrollViewer.CanContentScroll="True"         
+
+                              ScrollViewer.IsDeferredScrollingEnabled="True" 
+
+                              ScrollViewer.HorizontalScrollBarVisibility="Visible" SelectionChanged="DataGrid_SelectionChanged_1" Width="1126" Height="403" Canvas.Left="64" Canvas.Top="114" >
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Giao dịch" Binding="{Binding ID}"  Width="200"/>
+                                            <DataGridTextColumn Header="Nhân viên" Binding="{Binding Name}" Width="200" />
+                                            <DataGridTextColumn Header="Số tiền" Binding="{Binding Money}" Width="250" />
+                                            <DataGridTextColumn Header="Thời gian" Binding="{Binding Time}" Width="160" />
+                                            <DataGridTextColumn Header="Ngày giao dịch" Binding="{Binding Date}" Width="300" />
+
+
+                                        </DataGrid.Columns>
+
+                                        <DataGrid.ColumnHeaderStyle>
+                                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                                <Setter Property="FontWeight"  Value="Bold" />
+                                                <Setter Property="FontSize"  Value="33" />
+                                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                            </Style>
+                                        </DataGrid.ColumnHeaderStyle>
+                                    </DataGrid>
+
+                                    <Grid Name="3" Width="600"
+                         Height="120" Canvas.Left="44" Canvas.Top="540">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="73*" />
+                                            <ColumnDefinition Width="47*"/>
+                                            <ColumnDefinition Width="180*" />
+
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="1*" />
+                                            <RowDefinition Height="1*" />
+
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Style="{DynamicResource LargeText}"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" Text="Tổng doanh thu"
+                                   Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="7,10,6,10"/>
+
+                                        <TextBlock Style="{DynamicResource LargeText}" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" Text="Số giao dịch"
+                                   Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="34,10,33,10"/>
+
+                                    </Grid>
+                                    <Button Name="1" Style="{DynamicResource BlueFormatButton}"
+                            Width="62" Height="62" Canvas.Left="1102" Canvas.Top="558">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="Images/redo-order.png" Margin="5"
+                                   RenderOptions.BitmapScalingMode="Fant"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Name="2" Style="{DynamicResource BlueFormatButton}"
+                            Width="62" Height="62" Canvas.Left="986" Canvas.Top="558">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="Images/undo-order.png" Margin="5"
+                                   RenderOptions.BitmapScalingMode="Fant"/>
+                                        </StackPanel>
+                                    </Button>
+
+                                </Canvas>
+                            </Border>
+                            <Button Style="{DynamicResource RedFormatButton}"
+                                Width="300" Height="70" Canvas.Left="852" Canvas.Top="596">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="Images/printer-order.png" RenderOptions.BitmapScalingMode="Fant"/>
+                                    <TextBlock Text="In Doanh thu" Padding="5,0,0,0" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+
+                        </Canvas>
+
+                    </Canvas>
                 </TabItem>
             </TabControl>
             

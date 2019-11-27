@@ -112,8 +112,9 @@
                     <Grid Name="Sumary" Width="600"
                          Height="120" Canvas.Left="44" Canvas.Top="540">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="73*" />
+                            <ColumnDefinition Width="47*"/>
+                            <ColumnDefinition Width="180*" />
 
                         </Grid.ColumnDefinitions>
 
@@ -125,11 +126,11 @@
 
                         <TextBlock Style="{DynamicResource LargeText}"
                                        HorizontalAlignment="Center" VerticalAlignment="Center" Text="Tổng doanh thu"
-                                   Grid.Column="0" Grid.Row="0"/>
+                                   Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="7,10,6,10"/>
 
                         <TextBlock Style="{DynamicResource LargeText}" 
                                        HorizontalAlignment="Center" VerticalAlignment="Center" Text="Số giao dịch"
-                                   Grid.Column="0" Grid.Row="1"/>
+                                   Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="34,10,33,10"/>
 
                     </Grid>
                     <Button Name="RedoButton" Style="{DynamicResource BlueFormatButton}"
