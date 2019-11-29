@@ -15,10 +15,27 @@
             <Setter Property="CornerRadius" Value="30"/>
         </Style>
 
+        <Style x:Key="QuantityTextBox" TargetType="{x:Type TextBox }">
+            <Setter Property="Width" Value="37"/>
+            <Setter Property="Height" Value="47"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <Style x:Key="myHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="Visibility" Value="Collapsed" />
+        </Style>
+
         <Style x:Key="SmallText" TargetType="{x:Type TextBlock}">
             <Setter Property="FontSize" Value="22"/>
             <Setter Property="FontWeight" Value="Medium"/>
             <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
 
         </Style>
 
@@ -26,12 +43,14 @@
             <Setter Property="FontSize" Value="25"/>
             <Setter Property="FontWeight" Value="Medium"/>
             <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
 
         </Style>
 
         <Style x:Key="LargeText" TargetType="{x:Type TextBlock}">
             <Setter Property="FontSize" Value="30"/>
             <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
         <Style x:Key="RedFormatButton" TargetType="{x:Type Button}">
@@ -121,8 +140,20 @@
                                 <TextBlock Text="Danh sách sản phẩm" TextWrapping="Wrap" 
                                Style="{DynamicResource SmallText}"
                                RenderTransformOrigin="0.865,1.962" Canvas.Left="40" Canvas.Top="26"/>
+
+                                <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center" Text="Tên" Canvas.Left="129" Canvas.Top="92"
+                                   />
+
+                                <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center" Text="Giá" Canvas.Left="271" Canvas.Top="92"
+                                   />
+
+                                <TextBlock Style="{DynamicResource SmallText}"  HorizontalAlignment="Center" Text="Số lượng" Canvas.Left="348" Canvas.Top="91"
+                                   />
+
+                                <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center" Padding="0,5,0,0" Text="Tổng" Canvas.Left="505" Canvas.Top="86" RenderTransformOrigin="0.604,1.144"
+                                   />
                                 <Grid x:Name="OrderList" Width="555" ShowGridLines="True"
-                          Canvas.Left="40" Canvas.Top="87" Height="439">
+                          Canvas.Left="40" Canvas.Top="121" Height="Auto" VerticalAlignment="Center">
 
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="4*" />
@@ -131,17 +162,7 @@
                                         <ColumnDefinition Width="3*" />
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center" Text="Tên"
-                                   Grid.Column="0" Grid.Row="0"/>
 
-                                    <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center" Text="Giá"
-                                   Grid.Column="1" Grid.Row="0"/>
-
-                                    <TextBlock Style="{DynamicResource SmallText}"  HorizontalAlignment="Center" Text="Số lượng"
-                                   Grid.Column="2" Grid.Row="0"/>
-
-                                    <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center" Padding="0,5,0,0" Text="Tổng"
-                                   Grid.Column="3" Grid.Row="0"/>
 
                                 </Grid>
 
@@ -266,6 +287,35 @@
                                     </CheckBox>
                                     <TextBlock Text="Snack" Style="{DynamicResource SmallText}" Padding="5,0,0,0"/>
                                 </StackPanel>
+
+                                <!--<ListView Name="DataListView" Canvas.Left="37" Canvas.Top="208" Width="450" Height="380">
+                                    <ListView.View>
+                                        <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
+                                            <GridViewColumn Header="Tên" Width="300" DisplayMemberBinding="{Binding TenSP}" />
+                                            <GridViewColumn Header="Giá" Width="150" DisplayMemberBinding="{Binding GiaBan}" />
+                                            
+                                        </GridView>
+                                    </ListView.View>
+
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="ListViewItem">
+                                            <Setter Property="FontSize" Value="22"/>
+                                            <Setter Property="FontWeight" Value="Medium"/>
+                                            <Setter Property="FontStyle" Value="Italic"/>
+                                            <Setter Property="Foreground" Value="Black"/>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+                                </ListView>-->
+
+                                <Grid Name="ProductListGrid" Height="398" Width="443" Canvas.Left="43" Canvas.Top="184">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                </Grid>
+
+
                             </Canvas>
                         </Border>
 
@@ -328,9 +378,9 @@
                                 <Canvas>
                                     <TextBlock Text="Ngày" Style="{DynamicResource MediumText}" Canvas.Left="689" Canvas.Top="57" RenderTransformOrigin="1.031,-0.547"></TextBlock>
                                     <TextBox Width="382" Height="60" Canvas.Left="782" Canvas.Top="30"></TextBox>
-                                    <DataGrid HorizontalAlignment="Center" AutoGenerateColumns="False" 
-                              Name="dgUsers"
-                              ScrollViewer.CanContentScroll="True"         
+                                    <!--<DataGrid HorizontalAlignment="Center" AutoGenerateColumns="False" 
+                                        Name="dgUsers"
+                                           ScrollViewer.CanContentScroll="True"         
 
                               ScrollViewer.IsDeferredScrollingEnabled="True" 
 
@@ -353,10 +403,10 @@
                                                 <Setter Property="HorizontalContentAlignment" Value="Center" />
                                             </Style>
                                         </DataGrid.ColumnHeaderStyle>
-                                    </DataGrid>
+                                    </DataGrid>-->
 
-                                    <Grid Name="3" Width="600"
-                         Height="120" Canvas.Left="44" Canvas.Top="540">
+                                    <Grid Name="StatisticsSumaray" Width="600"
+                                        Height="120" Canvas.Left="44" Canvas.Top="540">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="73*" />
                                             <ColumnDefinition Width="47*"/>
@@ -379,14 +429,14 @@
                                    Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="34,10,33,10"/>
 
                                     </Grid>
-                                    <Button Name="1" Style="{DynamicResource BlueFormatButton}"
+                                    <Button Name="ForwardButton" Style="{DynamicResource BlueFormatButton}"
                             Width="62" Height="62" Canvas.Left="1102" Canvas.Top="558">
                                         <StackPanel Orientation="Horizontal">
                                             <Image Source="Images/redo-order.png" Margin="5"
                                    RenderOptions.BitmapScalingMode="Fant"/>
                                         </StackPanel>
                                     </Button>
-                                    <Button Name="2" Style="{DynamicResource BlueFormatButton}"
+                                    <Button Name="BackButton" Style="{DynamicResource BlueFormatButton}"
                             Width="62" Height="62" Canvas.Left="986" Canvas.Top="558">
                                         <StackPanel Orientation="Horizontal">
                                             <Image Source="Images/undo-order.png" Margin="5"
@@ -407,6 +457,8 @@
                         </Canvas>
 
                     </Canvas>
+
+
                 </TabItem>
             </TabControl>
 

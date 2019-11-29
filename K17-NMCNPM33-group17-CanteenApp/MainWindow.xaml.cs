@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,11 +23,15 @@ namespace K17_NMCNPM33_group17_CanteenApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        DatabaseHandler db;
+        List<Product> productList;
+
+        Order currentOrder;
+
         public MainWindow()
         {
             InitializeComponent();
-<<<<<<< Updated upstream
-=======
+
             db = DatabaseHandler.getInstance();
 
             db.connection.Open();
@@ -67,7 +74,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
             setSearchProductList(dt);
 
-            
+
         }
 
         private void AddProduct_Click(object sender, RoutedEventArgs e)
@@ -217,13 +224,14 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
         }
 
+
         private void ChangeQuantity_TextChange(object sender, TextChangedEventArgs e)
         {
             var textbox = sender as TextBox;
             int index = int.Parse(textbox.Tag.ToString());
             int newQuanity = int.Parse(textbox.Text);
             currentOrder.detail[index].quantity = newQuanity;
->>>>>>> Stashed changes
+
         }
     }
 }
