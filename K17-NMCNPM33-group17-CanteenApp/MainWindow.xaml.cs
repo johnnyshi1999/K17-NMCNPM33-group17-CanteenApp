@@ -97,6 +97,10 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
             currentOrder.detail.Add(detail);
 
+            currentOrder.Notify("Change");
+            currentOrder.Notify("Sum");
+            currentOrder.Notify("Quantity");
+
             SetOrderList();
 
             
@@ -146,15 +150,99 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 SumPrice.Text = sumPrice.ToString();
                 SumPrice.Style = Resources["SmallText"] as Style;
                 SumPrice.HorizontalAlignment = HorizontalAlignment.Right;
+                SumPrice.Padding = new Thickness(0, 0, 10, 0);
 
                 OrderList.Children.Add(SumPrice);
 
                 Grid.SetRow(SumPrice, i);
                 Grid.SetColumn(SumPrice, 3);
 
+                Button DeleteButton = new Button()
+                {
+                    Content = new Image
+                    {
+                        Source = new BitmapImage(new Uri("Images/clear.png", UriKind.Relative)),
+                        VerticalAlignment = VerticalAlignment.Center
+                    }
+
+                };
+                DeleteButton.Background = null;
+                DeleteButton.BorderThickness = new Thickness(0, 0, 0, 0);
+                DeleteButton.Tag = i;
+                DeleteButton.Click += DeleteProcuct_Click;
+                DeleteButton.Margin = new Thickness(10, 0, 0, 0);
+
+                OrderList.Children.Add(DeleteButton);
+
+                Grid.SetRow(DeleteButton, i);
+                Grid.SetColumn(DeleteButton, 4);
+
                 OrderList.RowDefinitions.Add(new RowDefinition());
+
+                
             }
 
+            Sumary.Children.Clear();
+
+            TextBlock OrderSum = new TextBlock();
+            OrderSum.Text = currentOrder.Sum.ToString();
+            OrderSum.Style = Resources["LargeText"] as Style;
+            OrderSum.HorizontalAlignment = HorizontalAlignment.Right;
+            OrderSum.Padding = new Thickness(0, 0, 10, 0);
+
+            Sumary.Children.Add(OrderSum);
+            Grid.SetRow(OrderSum, 0);
+            Grid.SetColumn(OrderSum, 1);
+
+            TextBlock QuantitySum = new TextBlock();
+            QuantitySum.Text = currentOrder.Quantity.ToString();
+            QuantitySum.Style = Resources["LargeText"] as Style;
+            QuantitySum.HorizontalAlignment = HorizontalAlignment.Right;
+            QuantitySum.Padding = new Thickness(0, 0, 10, 0);
+
+            Sumary.Children.Add(QuantitySum);
+            Grid.SetRow(QuantitySum, 0);
+            Grid.SetColumn(QuantitySum, 0);
+
+            TextBox Recieve = new TextBox();
+            Recieve.Text = currentOrder.Receive.ToString();
+            Recieve.Style = Resources["QuantityTextBox"] as Style;
+            Recieve.TextChanged += ChangeRecieve_TextChange;
+
+            Sumary.Children.Add(Recieve);
+            Grid.SetRow(Recieve, 1);
+            Grid.SetColumn(Recieve, 1);
+
+
+            TextBlock OrderChange = new TextBlock();
+            OrderChange.Text = currentOrder.Change.ToString();
+            OrderChange.Style = Resources["LargeText"] as Style;
+            OrderChange.HorizontalAlignment = HorizontalAlignment.Right;
+            OrderChange.Padding = new Thickness(0, 0, 10, 0);
+
+            Sumary.Children.Add(OrderChange);
+            Grid.SetRow(OrderChange, 2);
+            Grid.SetColumn(OrderChange, 1);
+
+
+        }
+
+        private void ChangeRecieve_TextChange(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                currentOrder.Receive = int.Parse((sender as TextBox).Text);
+            }
+            catch
+            {
+                currentOrder.Receive = 0;
+                
+            }
+            finally
+            {
+                currentOrder.Notify("Change");
+                //SetOrderList();
+            }
             
         }
 
@@ -164,6 +252,8 @@ namespace K17_NMCNPM33_group17_CanteenApp
         /// <param name="dt">bảng DataTable chứa danh sách sản phẩm</param>
         void setSearchProductList(DataTable dt)
         {
+            if (productList.Count != 0)
+                productList.Clear();
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 Product product = new Product()
@@ -224,6 +314,12 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
         }
 
+        private void DeleteProcuct_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            currentOrder.detail.RemoveAt(int.Parse(button.Tag.ToString()));
+            SetOrderList();
+        }
 
         private void ChangeQuantity_TextChange(object sender, TextChangedEventArgs e)
         {
@@ -231,6 +327,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
             int index = int.Parse(textbox.Tag.ToString());
             int newQuanity = int.Parse(textbox.Text);
             currentOrder.detail[index].quantity = newQuanity;
+
 
         }
     }

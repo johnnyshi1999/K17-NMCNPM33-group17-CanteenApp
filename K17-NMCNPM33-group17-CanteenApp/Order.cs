@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
         public int quantity;
     }
 
-    class Order
+    class Order : INotifyPropertyChanged
     {
         public string OrderID;
         public int number;
@@ -23,7 +24,20 @@ namespace K17_NMCNPM33_group17_CanteenApp
         public DateTime TimeCreated;
         public List<OrderDetail> detail;
 
-        int Sum {
+        public int Quantity
+        {
+            get
+            {
+                int result = 0;
+                for (int i = 0; i < detail.Count; i++)
+                {
+                    result += detail[i].quantity;
+                }
+                return result;
+            }
+        } 
+
+        public int Sum {
             get
             {
                 int result = 0;
@@ -34,8 +48,23 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 return result;
             }
             }
-        int Receive;
-        int Change;
+        
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void Notify(string attrib)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(attrib));
+        }
+
+        public int Receive;
+        public int Change
+        {
+            get
+            {
+                return Receive - Sum;
+            }
+        }
 
         public Order()
         {
