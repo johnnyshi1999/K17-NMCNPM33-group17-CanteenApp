@@ -8,9 +8,8 @@ namespace K17_NMCNPM33_group17_CanteenApp
 {
     class Product
     {
-        public string ProductID;
-        public string ProductName;
-        public string Type;
-        public int price;
+        public string ProductID { get; set; }
+        public string ProductName { get; set; }
+        public int price { get; set; }
     }
 }

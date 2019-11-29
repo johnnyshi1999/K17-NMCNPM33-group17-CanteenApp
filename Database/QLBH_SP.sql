@@ -3,6 +3,17 @@ go
 use QLBH
 go
 --Tạo store procedure
+--0. Trả về danh sách sản phẩm
+IF OBJECT_ID ('SP_DanhSachSP')
+IS NOT NULL
+DROP PROCEDURE SP_DanhSachSP 
+GO
+CREATE PROCEDURE SP_DanhSachSP
+AS
+	SELECT SANPHAM.MaSP, SANPHAM.TenSP, SP_TrungBay.GiaBan
+	FROM (SANPHAM JOIN SP_TrungBay ON SANPHAM.MASP = SP_TrungBay.MaSP)
+GO
+
 --1. Tìm sản phẩm theo mã sản phẩm
 IF OBJECT_ID ('SP_SanPhamTheoMa')
 IS NOT NULL

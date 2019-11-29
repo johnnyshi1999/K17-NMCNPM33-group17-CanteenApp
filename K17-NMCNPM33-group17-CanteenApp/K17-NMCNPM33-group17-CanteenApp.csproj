@@ -63,9 +63,6 @@
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Statistic.xaml.cs">
-      <DependentUpon>Statistic.xaml</DependentUpon>
-    </Compile>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -143,6 +140,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\edit-menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\add-button.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
