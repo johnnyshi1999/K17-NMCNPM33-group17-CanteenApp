@@ -14,7 +14,7 @@
             <Setter Property="Background" Value="#F3F3F3"/>
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="BorderBrush" Value="Black"/>
-            <Setter Property="CornerRadius" Value="30"/>
+            <Setter Property="CornerRadius" Value="10"/>
         </Style>
 
         <Style x:Key="QuantityTextBox" TargetType="{x:Type TextBox }">
@@ -77,7 +77,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="30" Background="#DF0000" BorderThickness="0" Padding="2">
+                        <Border CornerRadius="10" Background="#DF0000" BorderThickness="0" Padding="2">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
 
@@ -95,7 +95,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="30" Background="#183557" BorderThickness="0" Padding="2">
+                        <Border CornerRadius="10" Background="#183557" BorderThickness="0" Padding="2">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
 
@@ -147,9 +147,9 @@
                                RenderOptions.BitmapScalingMode="Fant"></Image>
                     </TabItem.Header>
 
-                    <Canvas x:Name ="MainCanvas" Canvas.Left="98" Canvas.Top="98"  Height="896" Width="1336">
-                        <Border Style="{DynamicResource SectionBorder}" Width="664" Height="765" Canvas.Left="56" Canvas.Top="134" 
-                       >
+                    <Canvas x:Name ="MainCanvas" Canvas.Left="98" Canvas.Top="0" Width="1326">
+                        <Border Style="{DynamicResource SectionBorder}" Width="700" Height="686"
+                                Canvas.Left="612" Canvas.Top="80" >
                             <Canvas>
                                 <TextBlock Text="Danh sách sản phẩm" TextWrapping="Wrap" 
                                Style="{DynamicResource SmallText}"
@@ -176,9 +176,26 @@
                                         <ColumnDefinition Width="3*" />
                                         <ColumnDefinition Width="1*"/>
                                     </Grid.ColumnDefinitions>
-
-
-
+                                    <Border BorderBrush="Black" BorderThickness="0,0,1,1" Grid.Column="0">
+                                        <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center"
+                                           Text="Tên" Canvas.Left="129" Canvas.Top="92" Padding="0,0,0,5"
+                                            />
+                                    </Border>
+                                    <Border BorderBrush="Black" BorderThickness="0,0,1,1" Grid.Column="1" >
+                                        <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center"
+                                           Text="Giá" Canvas.Left="271" Canvas.Top="92" Padding="0,0,0,5"
+                                            />
+                                    </Border>
+                                    <Border BorderBrush="Black" BorderThickness="0,0,1,1" Grid.Column="2" >
+                                        <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center"
+                                           Text="Số lượng" Canvas.Left="348" Canvas.Top="91" Padding="0,0,0,5"
+                                            />
+                                    </Border>
+                                    <Border BorderBrush="Black" BorderThickness="0,0,0,1" Grid.Column="3" >
+                                        <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center"
+                                                   Text="Tổng" Canvas.Left="505" Canvas.Top="86" Padding="0,0,0,5"
+                                           />
+                                    </Border>
                                 </Grid>
 
                                 <Border Background="White"
@@ -233,24 +250,25 @@
 
                                     </Canvas>
 
-                                </Border>
+                                </Grid>
 
                             </Canvas>
 
 
                         </Border>
 
-                        <Border Style="{DynamicResource SectionBorder}" Width="664" Height="116" Canvas.Left="56" Canvas.Top="7" 
-                       >
+                        <Border Width="692" Height="72" Canvas.Left="614" Canvas.Top="2"
+                                >
                             <StackPanel x:Name="EditOrderStackPanel" Orientation="Horizontal"
-                            HorizontalAlignment="Center">
+                            HorizontalAlignment="Left">
 
                                 <Button x:Name="NewOrderButton" Style="{DynamicResource RedFormatButton}" Margin="10,0,10,0"
                             Width="207" Height="62"
                                         Click="NewOrder_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="Images/new-order.png"
-                                   RenderOptions.BitmapScalingMode="Fant"/>
+                                               Width="52" Height="52"
+                                               RenderOptions.BitmapScalingMode="Fant"/>
                                         <TextBlock Text="Tạo order" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </Button>
@@ -260,70 +278,81 @@
                                         Click="DeleteOrder_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="Images/delete-order.png"
-                                   RenderOptions.BitmapScalingMode="Fant"/>
+                                               Width="52" Height="52"
+                                               RenderOptions.BitmapScalingMode="Fant"/>
                                         <TextBlock Text="Xóa order" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </Button>
 
-                                <Button x:Name="UndoButton" Style="{DynamicResource BlueFormatButton}"  Margin="10,0,10,0"
-                            Width="62" Height="62">
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Source="Images/undo-order.png" Margin="5"
-                                   RenderOptions.BitmapScalingMode="Fant"/>
-                                    </StackPanel>
+                                <Button x:Name="UndoButton" Style="{DynamicResource BlueFormatButton}"
+                                        Margin="90,0,10,0"
+                                        Width="62" Height="62" HorizontalAlignment="Right" >
+                                    <Image Source="Images/undo-order.png" Margin="5"
+                                           RenderOptions.BitmapScalingMode="Fant"/>
                                 </Button>
 
-                                <Button x:Name="RedoButton" Style="{DynamicResource BlueFormatButton}"  Margin="10,0,10,0"
-                            Width="62" Height="62">
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Source="Images/redo-order.png" Margin="5"
-                                   RenderOptions.BitmapScalingMode="Fant"/>
-                                    </StackPanel>
+                                <Button x:Name="RedoButton" Style="{DynamicResource BlueFormatButton}"
+                                        Margin="10,0,10,0"
+                                        Width="62" Height="62" HorizontalAlignment="Right" >
+                                    <Image Source="Images/redo-order.png" Margin="5"
+                                           RenderOptions.BitmapScalingMode="Fant"/>
                                 </Button>
 
                             </StackPanel>
                         </Border>
 
-                        <Border Style="{DynamicResource SectionBorder}" Width="542" Height="626" Canvas.Left="743" Canvas.Top="7" 
-                       >
-
+                        <Border Style="{DynamicResource SectionBorder}" Width="577" Height="900"
+                                Canvas.Left="10" Canvas.Top="8"
+                                >
                             <Canvas x:Name="FastSearch">
-                                <TextBlock Text="Tìm kiếm" Style="{DynamicResource MediumText}" Canvas.Left="37" Canvas.Top="24"/>
-                                <TextBox Width="382" Height="60" Canvas.Left="37" Canvas.Top="62"/>
+                                <TextBlock Text="Tìm kiếm" Style="{DynamicResource MediumText}"
+                                           Canvas.Left="12" Canvas.Top="7"/>
+                                <Border Canvas.Left="15" Canvas.Top="44"
+                                        Width="445" Height="60"
+                                        BorderBrush="Black" BorderThickness="1">
+                                    <TextBox x:Name="txtBoxInputSearch"
+                                             BorderBrush="Black"
+                                             BorderThickness="2"/>
+                                </Border>
+
                                 <Button x:Name="SearchButton" Style="{DynamicResource BlueFormatButton}"
-                            Width="62" Height="62" RenderTransformOrigin="6.126,1.348" Canvas.Left="424" Canvas.Top="62">
+                                        Width="60" Height="60" RenderTransformOrigin="6.126,1.348"
+                                        Canvas.Left="487" Canvas.Top="44">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="Images/search-product.png" Margin="5"
-                                   RenderOptions.BitmapScalingMode="Fant"/>
+                                               RenderOptions.BitmapScalingMode="Fant"/>
                                     </StackPanel>
                                 </Button>
-                                <StackPanel Orientation="Horizontal" Canvas.Left="37" Canvas.Top="149">
-                                    <CheckBox x:Name="Course">
-                                        <CheckBox.LayoutTransform>
-                                            <ScaleTransform ScaleX="2" ScaleY="2" />
-                                        </CheckBox.LayoutTransform>
-                                    </CheckBox>
-                                    <TextBlock Text="Thức ăn" Style="{DynamicResource SmallText}" Padding="5,0,0,0"/>
-                                </StackPanel>
 
-                                <StackPanel Orientation="Horizontal" Canvas.Left="184" Canvas.Top="149">
-                                    <CheckBox x:Name="Drink">
-                                        <CheckBox.LayoutTransform>
-                                            <ScaleTransform ScaleX="2" ScaleY="2" />
-                                        </CheckBox.LayoutTransform>
-                                    </CheckBox>
-                                    <TextBlock Text="Thức uống" Style="{DynamicResource SmallText}" Padding="5,0,0,0"/>
-                                </StackPanel>
+                                <StackPanel Orientation="Horizontal"
+                                            Canvas.Left="15" Canvas.Top="120" Width="Auto">
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,20,0" >
+                                        <CheckBox x:Name="Course">
+                                            <CheckBox.LayoutTransform>
+                                                <ScaleTransform ScaleX="2" ScaleY="2" />
+                                            </CheckBox.LayoutTransform>
+                                        </CheckBox>
+                                        <TextBlock Text="Thức ăn" Style="{DynamicResource SmallText}" Padding="5,0,0,0"/>
+                                    </StackPanel>
 
-                                <StackPanel Orientation="Horizontal" Canvas.Left="364" Canvas.Top="149">
-                                    <CheckBox x:Name="Snack">
-                                        <CheckBox.LayoutTransform>
-                                            <ScaleTransform ScaleX="2" ScaleY="2" />
-                                        </CheckBox.LayoutTransform>
-                                    </CheckBox>
-                                    <TextBlock Text="Snack" Style="{DynamicResource SmallText}" Padding="5,0,0,0"/>
-                                </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,20,0" >
+                                        <CheckBox x:Name="Drink">
+                                            <CheckBox.LayoutTransform>
+                                                <ScaleTransform ScaleX="2" ScaleY="2" />
+                                            </CheckBox.LayoutTransform>
+                                        </CheckBox>
+                                        <TextBlock Text="Thức uống" Style="{DynamicResource SmallText}" Padding="5,0,0,0"/>
+                                    </StackPanel>
 
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox x:Name="Snack">
+                                            <CheckBox.LayoutTransform>
+                                                <ScaleTransform ScaleX="2" ScaleY="2" />
+                                            </CheckBox.LayoutTransform>
+                                        </CheckBox>
+                                        <TextBlock Text="Snack" Style="{DynamicResource SmallText}" Padding="5,0,0,0"/>
+                                    </StackPanel>
+                                </StackPanel>
                                 <!--<ListView Name="DataListView" Canvas.Left="37" Canvas.Top="208" Width="450" Height="380">
                                     <ListView.View>
                                         <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
@@ -343,15 +372,15 @@
                                     </ListView.ItemContainerStyle>
                                 </ListView>-->
 
-                                <Grid Name="ProductListGrid" Height="398" Width="443" Canvas.Left="43" Canvas.Top="184">
+                                <Grid Name="ProductListGrid" Height="398" Width="443"
+                                      ShowGridLines="True"
+                                      Canvas.Left="43" Canvas.Top="184">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="2*"></ColumnDefinition>
                                         <ColumnDefinition Width="2*"></ColumnDefinition>
                                         <ColumnDefinition Width="1*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                 </Grid>
-
-
                             </Canvas>
                         </Border>
 
@@ -372,8 +401,8 @@
                                         <Button x:Name="IncreaseNumerButton"
                                                 Click="ChangeNumber_Click"
                                         Width="45" Height="45" Style="{DynamicResource BlueFormatButton}" Canvas.Left="348" Canvas.Top="16">
-                                            <Image Source="Images/plus-sign.png" RenderOptions.BitmapScalingMode="Fant"/>
-                                        </Button>
+                                    <Image Source="Images/plus-sign.png" RenderOptions.BitmapScalingMode="Fant"/>
+                                </Button>
 
                                         <Button x:Name="DecreaseNumerButton"
                                         Width="45" Height="45" Style="{DynamicResource BlueFormatButton}" 
@@ -393,11 +422,6 @@
                                     </StackPanel>
                                 </Button>
 
-                                <Button Style="{DynamicResource RedFormatButton}"
-                                Width="207" Height="62" Canvas.Left="282" Canvas.Top="113">
-                                    <TextBlock Text="Chuyển cho bếp" VerticalAlignment="Center"/>
-                                </Button>
-                            </Canvas>
                         </Border>
 
                     </Canvas>
