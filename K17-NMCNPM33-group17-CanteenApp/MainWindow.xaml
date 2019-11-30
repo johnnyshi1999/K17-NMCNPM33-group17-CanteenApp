@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:K17_NMCNPM33_group17_CanteenApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="1054" Width="1440"
-        Loaded="Window_Loaded"
+		Loaded="Window_Loaded"
         Closing="Window_Closing">
 
     <Window.Resources>
@@ -30,7 +30,7 @@
         </Style>
 
         <Style x:Key="SumQuantityTextBox" TargetType="{x:Type TextBox }">
-            
+
             <Setter Property="Height" Value="35"/>
             <Setter Property="FontSize" Value="30"/>
             <Setter Property="FontWeight" Value="Medium"/>
@@ -149,7 +149,7 @@
 
                     <Canvas x:Name ="MainCanvas" Canvas.Left="98" Canvas.Top="0" Width="1326">
                         <Border Style="{DynamicResource SectionBorder}" Width="700" Height="686"
-                                Canvas.Left="612" Canvas.Top="80" >
+                                Canvas.Left="603" Canvas.Top="141" >
                             <Canvas>
                                 <TextBlock Text="Danh sách sản phẩm" TextWrapping="Wrap" 
                                Style="{DynamicResource SmallText}"
@@ -199,7 +199,7 @@
                                 </Grid>
 
                                 <Border Background="White"
-                       BorderBrush="Black" BorderThickness="2" CornerRadius="30" Canvas.Left="40" Canvas.Top="546" Height="190" Width="555">
+                       BorderBrush="Black" BorderThickness="2" CornerRadius="30" Canvas.Left="69" Canvas.Top="288" Height="190" Width="555">
                                     <Canvas>
                                         <TextBlock Style="{DynamicResource LargeText}"
                                        HorizontalAlignment="Center" VerticalAlignment="Center" Text="Tổng" Canvas.Left="166" Canvas.Top="10"/>
@@ -249,8 +249,8 @@
                                         </Grid>
 
                                     </Canvas>
+                                </Border>
 
-                                </Grid>
 
                             </Canvas>
 
@@ -384,7 +384,7 @@
                             </Canvas>
                         </Border>
 
-                        <Border Style="{DynamicResource SectionBorder}" Width="555" Height="234" Canvas.Left="743" Canvas.Top="662" 
+                        <Border Style="{DynamicResource SectionBorder}" Width="555" Height="234" Canvas.Left="661" Canvas.Top="653" 
                        >
                             <Canvas x:Name="Overview" Margin="0.4,38.4,-0.4,-0.4">
                                 <Border
@@ -401,8 +401,8 @@
                                         <Button x:Name="IncreaseNumerButton"
                                                 Click="ChangeNumber_Click"
                                         Width="45" Height="45" Style="{DynamicResource BlueFormatButton}" Canvas.Left="348" Canvas.Top="16">
-                                    <Image Source="Images/plus-sign.png" RenderOptions.BitmapScalingMode="Fant"/>
-                                </Button>
+                                            <Image Source="Images/plus-sign.png" RenderOptions.BitmapScalingMode="Fant"/>
+                                        </Button>
 
                                         <Button x:Name="DecreaseNumerButton"
                                         Width="45" Height="45" Style="{DynamicResource BlueFormatButton}" 
@@ -421,7 +421,7 @@
                                         <TextBlock Text="In Order" Padding="5,0,0,0" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </Button>
-
+                            </Canvas>
                         </Border>
 
                     </Canvas>

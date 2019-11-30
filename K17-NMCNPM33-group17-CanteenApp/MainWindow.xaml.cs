@@ -28,23 +28,16 @@ namespace K17_NMCNPM33_group17_CanteenApp
         List<Product> productList;
 
         Order currentOrder;
-
-        DateTime currentDate { get; set; }
-
-        int currentNumber { get; set; }
-
-        public MainWindow()
+		DateTime currentDate { get; set; }
+		int currentNumber { get; set; }
+		
+		public MainWindow()
         {
             InitializeComponent();
 
             db = DatabaseHandler.getInstance();
 
             db.connection.Open();
-
-            
-
-
-
             //string SQLSelect = "Select * From SANPHAM";
             //SqlCommand cmd = new SqlCommand(SQLSelect, db.connection);
             //SqlDataReader dr = cmd.ExecuteReader();
@@ -97,8 +90,6 @@ namespace K17_NMCNPM33_group17_CanteenApp
             // Bind the new data source to the myText TextBlock control's Text dependency property.
             QuantityTextBlock.SetBinding(TextBlock.TextProperty, QuantityBinding);
 
-            
-
             setSearchProductList(dt);
 
             db.connection.Close();
@@ -122,14 +113,8 @@ namespace K17_NMCNPM33_group17_CanteenApp
                     return;
                 }
             }
-
-            currentOrder.detail.Add(detail);
-
-            
-
+			currentOrder.detail.Add(detail);
             SetOrderList();
-
-            
         }
 
         void SetOrderList()
@@ -177,8 +162,8 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 SumPrice.Style = Resources["SmallText"] as Style;
                 SumPrice.HorizontalAlignment = HorizontalAlignment.Right;
                 SumPrice.Padding = new Thickness(0, 0, 10, 0);
-
-                OrderList.Children.Add(SumPrice);
+				
+				OrderList.Children.Add(SumPrice);
 
                 Grid.SetRow(SumPrice, i);
                 Grid.SetColumn(SumPrice, 3);
@@ -202,11 +187,9 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
                 Grid.SetRow(DeleteButton, i);
                 Grid.SetColumn(DeleteButton, 4);
-
-                OrderList.RowDefinitions.Add(new RowDefinition());
-
-                
-            }
+				
+				OrderList.RowDefinitions.Add(new RowDefinition());
+			}
 
             //Sumary.Children.Clear();
 
@@ -253,11 +236,9 @@ namespace K17_NMCNPM33_group17_CanteenApp
             currentOrder.Notify("Change");
             currentOrder.Notify("OrderSum");
             currentOrder.Notify("Quantity");
-
-
-        }
-
-        private void ChangeRecieve_TextChange(object sender, TextChangedEventArgs e)
+		}
+		
+		private void ChangeRecieve_TextChange(object sender, TextChangedEventArgs e)
         {
             try
             {
@@ -385,11 +366,9 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 currentOrder.Notify("OrderSum");
                 currentOrder.Notify("Quantity");
             }
-            
-            
-        }
-
-        private void CurrentNumberTextBox_TextChanged(object sender, TextChangedEventArgs e)
+		}
+		
+		private void CurrentNumberTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
             {
