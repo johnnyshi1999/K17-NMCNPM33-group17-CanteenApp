@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:K17_NMCNPM33_group17_CanteenApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1054" Width="1440">
+        Title="MainWindow" Height="1054" Width="1440"
+		Loaded="Window_Loaded"
+        Closing="Window_Closing">
 
     <Window.Resources>
         <Style x:Key="SectionBorder" TargetType="{x:Type Border }">
@@ -23,6 +25,18 @@
             <Setter Property="FontStyle" Value="Italic"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <Style x:Key="SumQuantityTextBox" TargetType="{x:Type TextBox }">
+
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextAlignment" Value="Right"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Margin" Value="5"/>
         </Style>
@@ -199,7 +213,7 @@
                                            Grid.Column="0" Grid.Row="0"
                                            HorizontalAlignment="Center"
                                            Canvas.Left="69" Canvas.Top="16"/>
-                                        <TextBlock Text="30" Style="{DynamicResource SmallText}"
+                                        <TextBlock x:Name="txtBoxCurrentNumber" Text="30" Style="{DynamicResource SmallText}"
                                            Grid.Column="1" Grid.Row="0"
                                            HorizontalAlignment="Center"
                                            Canvas.Left="295" Canvas.Top="16"/>
@@ -346,9 +360,9 @@
                                     </ListView.ItemContainerStyle>
                                 </ListView>-->
 
-                                <Grid Name="ProductListGrid" Height="398" Width="443"
+                                <Grid Name="ProductListGrid" Height="70" Width="558"
                                       ShowGridLines="True"
-                                      Canvas.Left="43" Canvas.Top="184">
+                                      Canvas.Left="8" Canvas.Top="171">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="2*"></ColumnDefinition>
                                         <ColumnDefinition Width="2*"></ColumnDefinition>
@@ -358,7 +372,7 @@
                             </Canvas>
                         </Border>
                         <Button x:Name="btnPrintBill" Style="{DynamicResource RedFormatButton}"
-                                Width="150" Height="120" Canvas.Left="785" Canvas.Top="786">
+                                Width="116" Height="120" Canvas.Left="757" Canvas.Top="786">
                             <StackPanel Orientation="Vertical">
                                 <Image Source="Images/printer-order.png"
                                        Width="50" Height="50"
@@ -367,7 +381,7 @@
                             </StackPanel>
                         </Button>
                         <Button x:Name="btnPay" Style="{DynamicResource RedFormatButton}"
-                                Width="150" Height="120" Canvas.Left="625" Canvas.Top="786" Click="BtnPay_Click"
+                                Width="136" Height="120" Canvas.Left="613" Canvas.Top="786" Click="BtnPay_Click"
                                 >
                             <StackPanel Orientation="Vertical">
                                 <Image Width="50" Height="50"
@@ -379,13 +393,13 @@
                             </StackPanel>
                         </Button>
                         <Border Style="{DynamicResource ResourceKey=SectionBorder}"
-                                        Canvas.Left="962" Canvas.Top="778"
-                                        Height="130" Width="348">
+                                        Canvas.Left="883" Canvas.Top="778"
+                                        Height="130" Width="427">
                             <Grid x:Name="Summary">
 
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*" />
-                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="3*" />
                                 </Grid.ColumnDefinitions>
 
                                 <Grid.RowDefinitions>
@@ -407,11 +421,18 @@
                                            Grid.Column="0" Grid.Row="2"/>
 
                                 <TextBlock x:Name="totalAmountDue" Style="{DynamicResource LargeText}"
-                                           Text="120.000 VND" Margin="0,0,6,0"
+                                           Text="120000 VND" Margin="0,0,6,0"
                                            HorizontalAlignment="Right" VerticalAlignment="Center"
                                            Grid.Column="1" Grid.Row="0" />
-                                <TextBlock x:Name="receivedAmount" Style="{DynamicResource LargeText}"
-                                           Text="120.000 VND" Margin="0,0,6,0"
+                                <TextBox x:Name="receivedAmount"
+                                         Text="120000" Margin="0,6,77,4"
+                                         HorizontalAlignment="Right" VerticalAlignment="Center"
+                                         Grid.Column="1" Grid.Row="1" Width="234" Height="32"
+                                         FontSize="30" Padding="0,-6,0,0"
+                                         HorizontalContentAlignment="Right"
+                                         FontWeight="Bold" />
+                                <TextBlock x:Name="currencyUnit" Style="{DynamicResource LargeText}"
+                                           Text="VND" Margin="0,0,6,0"
                                            HorizontalAlignment="Right" VerticalAlignment="Center"
                                            Grid.Column="1" Grid.Row="1" />
                                 <TextBlock x:Name="changeAmount" Style="{DynamicResource LargeText}"
