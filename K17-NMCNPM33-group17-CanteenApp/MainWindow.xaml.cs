@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -278,7 +279,8 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 {
                     ProductID = dt.Rows[i][0].ToString(),
                     ProductName = dt.Rows[i][1].ToString(),
-                    price = int.Parse(dt.Rows[i][2].ToString()),
+                    type = Product.typeStringToInt(dt.Rows[i][2].ToString()),
+                    price = int.Parse(dt.Rows[i][3].ToString()),
                 };
                 productList.Add(product);
             }
@@ -507,6 +509,13 @@ namespace K17_NMCNPM33_group17_CanteenApp
 		
 		private void BtnPay_Click(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            RegexOptions options = RegexOptions.Multiline | RegexOptions.IgnoreCase;
+            string searchQuery = txtBoxInputSearch.Text;
 
         }
     }

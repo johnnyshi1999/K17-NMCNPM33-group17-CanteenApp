@@ -182,7 +182,7 @@
                                 </Grid>
 
                                 <Grid x:Name="OrderList" Width="698" ShowGridLines="True"
-                                      Canvas.Left="0" Canvas.Top="36" Height="30" VerticalAlignment="Center">
+                                      Canvas.Left="0" Canvas.Top="36" Height="606" VerticalAlignment="Center">
 
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="4*" />
@@ -305,7 +305,7 @@
 
                                 <Button x:Name="SearchButton" Style="{DynamicResource BlueFormatButton}"
                                         Width="60" Height="60" RenderTransformOrigin="6.126,1.348"
-                                        Canvas.Left="487" Canvas.Top="44">
+                                        Canvas.Left="487" Canvas.Top="44" Click="SearchButton_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="Images/search-product.png" Margin="5"
                                                RenderOptions.BitmapScalingMode="Fant"/>
@@ -315,16 +315,16 @@
                                 <StackPanel Orientation="Horizontal"
                                             Canvas.Left="15" Canvas.Top="120" Width="Auto">
                                     <StackPanel Orientation="Horizontal" Margin="0,0,20,0" >
-                                        <CheckBox x:Name="Course">
+                                        <CheckBox x:Name="chkBoxCourse">
                                             <CheckBox.LayoutTransform>
                                                 <ScaleTransform ScaleX="2" ScaleY="2" />
                                             </CheckBox.LayoutTransform>
                                         </CheckBox>
-                                        <TextBlock Text="Thức ăn" Style="{DynamicResource SmallText}" Padding="5,0,0,0"/>
+                                        <TextBlock Text="Món ăn" Style="{DynamicResource SmallText}" Padding="5,0,0,0"/>
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal" Margin="0,0,20,0" >
-                                        <CheckBox x:Name="Drink">
+                                        <CheckBox x:Name="chkBoxDrink">
                                             <CheckBox.LayoutTransform>
                                                 <ScaleTransform ScaleX="2" ScaleY="2" />
                                             </CheckBox.LayoutTransform>
@@ -333,7 +333,7 @@
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal">
-                                        <CheckBox x:Name="Snack">
+                                        <CheckBox x:Name="chkBoxSnack">
                                             <CheckBox.LayoutTransform>
                                                 <ScaleTransform ScaleX="2" ScaleY="2" />
                                             </CheckBox.LayoutTransform>
@@ -360,7 +360,7 @@
                                     </ListView.ItemContainerStyle>
                                 </ListView>-->
 
-                                <Grid Name="ProductListGrid" Height="70" Width="558"
+                                <Grid Name="ProductListGrid" Height="340" Width="558"
                                       ShowGridLines="True"
                                       Canvas.Left="8" Canvas.Top="171">
                                     <Grid.ColumnDefinitions>
