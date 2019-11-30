@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:K17_NMCNPM33_group17_CanteenApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1054" Width="1440">
+        Title="MainWindow" Height="1054" Width="1440"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing">
 
     <Window.Resources>
         <Style x:Key="SectionBorder" TargetType="{x:Type Border }">
@@ -23,6 +25,18 @@
             <Setter Property="FontStyle" Value="Italic"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <Style x:Key="SumQuantityTextBox" TargetType="{x:Type TextBox }">
+            
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextAlignment" Value="Right"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Margin" Value="5"/>
         </Style>
@@ -137,13 +151,30 @@
                         <Border Style="{DynamicResource SectionBorder}" Width="700" Height="686"
                                 Canvas.Left="612" Canvas.Top="80" >
                             <Canvas>
-                                <Grid Canvas.Top="0" Canvas.Left="0"
-                                      Width="698" Height="Auto">
+                                <TextBlock Text="Danh sách sản phẩm" TextWrapping="Wrap" 
+                               Style="{DynamicResource SmallText}"
+                               RenderTransformOrigin="0.865,1.962" Canvas.Left="40" Canvas.Top="26"/>
+
+                                <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center" Text="Tên" Canvas.Left="129" Canvas.Top="92"
+                                   />
+
+                                <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center" Text="Giá" Canvas.Left="250" Canvas.Top="91"
+                                   />
+
+                                <TextBlock Style="{DynamicResource SmallText}"  HorizontalAlignment="Center" Text="Số lượng" Canvas.Left="325" Canvas.Top="91"
+                                   />
+
+                                <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center" Padding="0,5,0,0" Text="Tổng" Canvas.Left="465" Canvas.Top="86" RenderTransformOrigin="0.604,1.144"
+                                   />
+                                <Grid x:Name="OrderList" Width="555" ShowGridLines="True"
+                          Canvas.Left="40" Canvas.Top="121" Height="Auto" VerticalAlignment="Center">
+
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="4*" />
                                         <ColumnDefinition Width="2*" />
                                         <ColumnDefinition Width="2*" />
                                         <ColumnDefinition Width="3*" />
+                                        <ColumnDefinition Width="1*"/>
                                     </Grid.ColumnDefinitions>
                                     <Border BorderBrush="Black" BorderThickness="0,0,1,1" Grid.Column="0">
                                         <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center"
@@ -167,17 +198,57 @@
                                     </Border>
                                 </Grid>
 
-                                <Grid x:Name="OrderList" Width="698" ShowGridLines="True"
-                                      Canvas.Left="0" Canvas.Top="36" Height="30" VerticalAlignment="Center">
+                                <Border Background="White"
+                       BorderBrush="Black" BorderThickness="2" CornerRadius="30" Canvas.Left="40" Canvas.Top="546" Height="190" Width="555">
+                                    <Canvas>
+                                        <TextBlock Style="{DynamicResource LargeText}"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" Text="Tổng" Canvas.Left="166" Canvas.Top="10"/>
 
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="4*" />
-                                        <ColumnDefinition Width="2*" />
-                                        <ColumnDefinition Width="2*" />
-                                        <ColumnDefinition Width="3*" />
-                                    </Grid.ColumnDefinitions>
+                                        <TextBlock Style="{DynamicResource LargeText}" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" Text="Nhận" Canvas.Left="163" Canvas.Top="74"/>
+
+                                        <TextBlock Style="{DynamicResource LargeText}" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" Text="Dư" Canvas.Left="196" Canvas.Top="135"/>
+
+                                        <Grid x:Name="Sumary" Width="268"
+                          Canvas.Left="273" Canvas.Top="0" Height="175">
 
 
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="2*" />
+                                                <ColumnDefinition Width="3*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="1*" />
+                                                <RowDefinition Height="1*" />
+                                                <RowDefinition Height="1*" />
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Name="QuantityTextBlock" Style="{StaticResource LargeText}"
+                                                       Text="{Binding Quanity}"
+                                                       Grid.Row="0" Grid.Column="0"
+                                                       HorizontalAlignment="Center"/>
+
+                                            <TextBlock Name="SumTextBlock" Style="{StaticResource LargeText}"
+                                                       Text="{Binding OrderSum}"
+                                                       Grid.Row="0" Grid.Column="1"
+                                                       HorizontalAlignment="Right"/>
+
+                                            <TextBox Name="RecieveTextBox" Style="{StaticResource SumQuantityTextBox}"
+                                                       Text="{Binding Recieve}"
+                                                       Grid.Row="1"
+                                                     TextChanged ="ChangeRecieve_TextChange" 
+                                                     HorizontalAlignment="Right" Grid.ColumnSpan="2" Margin="0,11.6,5,11.8" Width="156"/>
+
+                                            <TextBlock Name="ChangeTextBlock" Style="{StaticResource LargeText}"
+                                                       Text="{Binding Change}"
+                                                       Grid.Row="2" Grid.Column="1"
+                                                       HorizontalAlignment="Right"/>
+
+                                        </Grid>
+
+                                    </Canvas>
 
                                 </Grid>
 
@@ -191,8 +262,9 @@
                             <StackPanel x:Name="EditOrderStackPanel" Orientation="Horizontal"
                             HorizontalAlignment="Left">
 
-                                <Button x:Name="NewOrderButton" Style="{DynamicResource RedFormatButton}"
-                                        Margin="10,0" Width="207" Height="62">
+                                <Button x:Name="NewOrderButton" Style="{DynamicResource RedFormatButton}" Margin="10,0,10,0"
+                            Width="207" Height="62"
+                                        Click="NewOrder_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="Images/new-order.png"
                                                Width="52" Height="52"
@@ -201,9 +273,9 @@
                                     </StackPanel>
                                 </Button>
 
-                                <Button x:Name="DeleteOrderButton" Style="{DynamicResource RedFormatButton}"
-                                        Margin="10,0"
-                                        Width="207" Height="62">
+                                <Button x:Name="DeleteOrderButton" Style="{DynamicResource RedFormatButton}"  Margin="10,0,10,0"
+                            Width="207" Height="62"
+                                        Click="DeleteOrder_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="Images/delete-order.png"
                                                Width="52" Height="52"
@@ -311,106 +383,44 @@
                                 </Grid>
                             </Canvas>
                         </Border>
-                        <Button Style="{DynamicResource RedFormatButton}"
-                                Width="207" Height="62" Canvas.Left="636" Canvas.Top="831">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="Images/printer-order.png"
-                                       Width="50" Height="50"
-                                       RenderOptions.BitmapScalingMode="Fant"/>
-                                <TextBlock Text="In Order" Padding="8,0,0,0" VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </Button>
-                        <Button Style="{DynamicResource RedFormatButton}"
-                                Width="207" Height="62" Canvas.Left="646" Canvas.Top="771">
-                            <TextBlock Text="Thanh toán" VerticalAlignment="Center"/>
-                        </Button>
-                        <Border Background="White" BorderBrush="Black" BorderThickness="2"
-                                CornerRadius="10" Canvas.Left="708" Canvas.Top="282"
-                                Height="110" Width="399">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="2*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                 
-                                <TextBlock Text="Số thứ tự" Style="{DynamicResource MediumText}"
-                                           Grid.Column="0" Grid.Row="0"
-                                           HorizontalAlignment="Center"
-                                           Canvas.Left="69" Canvas.Top="16"/>
-                                <TextBlock Text="30" Style="{DynamicResource MediumText}"
-                                           Grid.Column="1" Grid.Row="0"
-                                           HorizontalAlignment="Center"
-                                           Canvas.Left="295" Canvas.Top="16"/>
-                                <TextBlock Text="Ngày" Style="{DynamicResource MediumText}"
-                                           Grid.Column="0" Grid.Row="1"
-                                           HorizontalAlignment="Center"
-                                           Canvas.Left="69" Canvas.Top="62"/>
-                                <TextBlock x:Name ="DateTextBlock" Text="2/12/2019"
-                                           Style="{DynamicResource MediumText}"
-                                           Grid.Column="1" Grid.Row="1"
-                                           HorizontalAlignment="Center"
-                                           Canvas.Left="255" Canvas.Top="62" />
 
-                                <!--<TextBox Height="42" Width="43" Text="30" FontSize="25" 
+                        <Border Style="{DynamicResource SectionBorder}" Width="555" Height="234" Canvas.Left="743" Canvas.Top="662" 
+                       >
+                            <Canvas x:Name="Overview" Margin="0.4,38.4,-0.4,-0.4">
+                                <Border
+                            Background="White"
+                        BorderBrush="Black" BorderThickness="2" CornerRadius="30" Canvas.Left="35" Canvas.Top="-15" Height="110" Width="454">
+                                    <Canvas>
+                                        <TextBlock Text="Số thứ tự" Style="{DynamicResource MediumText}" Canvas.Left="69" Canvas.Top="16"/>
+                                        <TextBlock Text="Ngày" Style="{DynamicResource MediumText}" Canvas.Left="69" Canvas.Top="63" RenderTransformOrigin="1.031,-0.547"/>
+                                        <TextBlock x:Name ="DateTextBlock" Style="{DynamicResource MediumText}" Canvas.Left="255" Canvas.Top="69" RenderTransformOrigin="0.526,1.173"/>
+                                        <TextBox Name ="CurrentNumberTextBox" Height="42" Width="43" FontSize="25" 
                                          VerticalAlignment="Center" HorizontalAlignment="Center"
-                                         Canvas.Left="280" Canvas.Top="19"/>-->
-                                <!--<Button x:Name="IncreaseNumerButton"
+                                         TextChanged="CurrentNumberTextBox_TextChanged"
+                                         Canvas.Left="280" Canvas.Top="19"/>
+                                        <Button x:Name="IncreaseNumerButton"
+                                                Click="ChangeNumber_Click"
                                         Width="45" Height="45" Style="{DynamicResource BlueFormatButton}" Canvas.Left="348" Canvas.Top="16">
                                     <Image Source="Images/plus-sign.png" RenderOptions.BitmapScalingMode="Fant"/>
                                 </Button>
 
-                                <Button x:Name="DecreaseNumerButton"
-                                        Width="45" Height="45" Style="{DynamicResource BlueFormatButton}" Canvas.Left="208" Canvas.Top="16">
-                                    <Image Source="Images/minus-sign.png" RenderOptions.BitmapScalingMode="Fant"/>
-                                </Button>-->
-                            </Grid>
-                        </Border>
-                        <Border Style="{DynamicResource ResourceKey=SectionBorder}"
-                                        Canvas.Left="962" Canvas.Top="778"
-                                        Height="130" Width="348">
-                            <Grid x:Name="Summary">
+                                        <Button x:Name="DecreaseNumerButton"
+                                        Width="45" Height="45" Style="{DynamicResource BlueFormatButton}" 
+                                                Click="ChangeNumber_Click"
+                                                Canvas.Left="208" Canvas.Top="16">
+                                            <Image Source="Images/minus-sign.png" RenderOptions.BitmapScalingMode="Fant"/>
+                                        </Button>
+                                    </Canvas>
+                                </Border>
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*" />
-                                    <ColumnDefinition Width="2*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*" />
-                                    <RowDefinition Height="1*" />
-                                    <RowDefinition Height="1*" />
-                                </Grid.RowDefinitions>
-
-                                <TextBlock Style="{DynamicResource LargeText}"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center" Text="Tổng"
-                                           Grid.Column="0" Grid.Row="0" />
-                                
-                                <TextBlock Style="{DynamicResource LargeText}" 
-                                           HorizontalAlignment="Center" VerticalAlignment="Center" Text="Nhận"
-                                           Grid.Column="0" Grid.Row="1"/>
-
-                                <TextBlock Style="{DynamicResource LargeText}" 
-                                           HorizontalAlignment="Center" VerticalAlignment="Center" Text="Dư"
-                                           Grid.Column="0" Grid.Row="2"/>
-
-                                <TextBlock x:Name="totalAmountDue" Style="{DynamicResource LargeText}"
-                                           Text="120.000 VND" Margin="0,0,6,0"
-                                           HorizontalAlignment="Right" VerticalAlignment="Center"
-                                           Grid.Column="1" Grid.Row="0" />
-                                <TextBlock x:Name="receivedAmount" Style="{DynamicResource LargeText}"
-                                           Text="120.000 VND" Margin="0,0,6,0"
-                                           HorizontalAlignment="Right" VerticalAlignment="Center"
-                                           Grid.Column="1" Grid.Row="1" />
-                                <TextBlock x:Name="changeAmount" Style="{DynamicResource LargeText}"
-                                           Text="0 VND" Margin="0,0,6,0"
-                                           HorizontalAlignment="Right" VerticalAlignment="Center"
-                                           Grid.Column="1" Grid.Row="2" />
-
-                            </Grid>
+                                <Button Style="{DynamicResource RedFormatButton}"
+                                Width="207" Height="62" Canvas.Left="50" Canvas.Top="113"
+                                        Click="SaveOrder_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Images/printer-order.png" RenderOptions.BitmapScalingMode="Fant"/>
+                                        <TextBlock Text="In Order" Padding="5,0,0,0" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
 
                         </Border>
 
