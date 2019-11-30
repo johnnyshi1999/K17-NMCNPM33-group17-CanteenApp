@@ -37,7 +37,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
             }
         } 
 
-        public int Sum {
+        public int OrderSum {
             get
             {
                 int result = 0;
@@ -62,7 +62,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
         {
             get
             {
-                return Receive - Sum;
+                return Receive - OrderSum;
             }
         }
 

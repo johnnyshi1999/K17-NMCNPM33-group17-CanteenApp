@@ -72,6 +72,21 @@ namespace K17_NMCNPM33_group17_CanteenApp
             DataTable dt = new DataTable();
             dt.Load(dr);
 
+            Binding orderSumBinding = new Binding("OrderSum");
+            orderSumBinding.Source = currentOrder;
+            // Bind the new data source to the myText TextBlock control's Text dependency property.
+            SumTextBlock.SetBinding(TextBlock.TextProperty, orderSumBinding);
+
+            Binding ChangeBinding = new Binding("Change");
+            ChangeBinding.Source = currentOrder;
+            // Bind the new data source to the myText TextBlock control's Text dependency property.
+            ChangeTextBlock.SetBinding(TextBlock.TextProperty, ChangeBinding);
+
+            Binding QuantityBinding = new Binding("Quantity");
+            QuantityBinding.Source = currentOrder;
+            // Bind the new data source to the myText TextBlock control's Text dependency property.
+            QuantityTextBlock.SetBinding(TextBlock.TextProperty, QuantityBinding);
+
             setSearchProductList(dt);
 
 
@@ -97,9 +112,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
             currentOrder.detail.Add(detail);
 
-            currentOrder.Notify("Change");
-            currentOrder.Notify("Sum");
-            currentOrder.Notify("Quantity");
+            
 
             SetOrderList();
 
@@ -182,47 +195,51 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 
             }
 
-            Sumary.Children.Clear();
+            //Sumary.Children.Clear();
 
-            TextBlock OrderSum = new TextBlock();
-            OrderSum.Text = currentOrder.Sum.ToString();
-            OrderSum.Style = Resources["LargeText"] as Style;
-            OrderSum.HorizontalAlignment = HorizontalAlignment.Right;
-            OrderSum.Padding = new Thickness(0, 0, 10, 0);
+            //TextBlock OrderSum = new TextBlock();
+            //OrderSum.Text = currentOrder.Sum.ToString();
+            //OrderSum.Style = Resources["LargeText"] as Style;
+            //OrderSum.HorizontalAlignment = HorizontalAlignment.Right;
+            //OrderSum.Padding = new Thickness(0, 0, 10, 0);
 
-            Sumary.Children.Add(OrderSum);
-            Grid.SetRow(OrderSum, 0);
-            Grid.SetColumn(OrderSum, 1);
+            //Sumary.Children.Add(OrderSum);
+            //Grid.SetRow(OrderSum, 0);
+            //Grid.SetColumn(OrderSum, 1);
 
-            TextBlock QuantitySum = new TextBlock();
-            QuantitySum.Text = currentOrder.Quantity.ToString();
-            QuantitySum.Style = Resources["LargeText"] as Style;
-            QuantitySum.HorizontalAlignment = HorizontalAlignment.Right;
-            QuantitySum.Padding = new Thickness(0, 0, 10, 0);
+            //TextBlock QuantitySum = new TextBlock();
+            //QuantitySum.Text = currentOrder.Quantity.ToString();
+            //QuantitySum.Style = Resources["LargeText"] as Style;
+            //QuantitySum.HorizontalAlignment = HorizontalAlignment.Right;
+            //QuantitySum.Padding = new Thickness(0, 0, 10, 0);
 
-            Sumary.Children.Add(QuantitySum);
-            Grid.SetRow(QuantitySum, 0);
-            Grid.SetColumn(QuantitySum, 0);
+            //Sumary.Children.Add(QuantitySum);
+            //Grid.SetRow(QuantitySum, 0);
+            //Grid.SetColumn(QuantitySum, 0);
 
-            TextBox Recieve = new TextBox();
-            Recieve.Text = currentOrder.Receive.ToString();
-            Recieve.Style = Resources["QuantityTextBox"] as Style;
-            Recieve.TextChanged += ChangeRecieve_TextChange;
+            //TextBox Recieve = new TextBox();
+            //Recieve.Text = currentOrder.Receive.ToString();
+            //Recieve.Style = Resources["QuantityTextBox"] as Style;
+            //Recieve.TextChanged += ChangeRecieve_TextChange;
 
-            Sumary.Children.Add(Recieve);
-            Grid.SetRow(Recieve, 1);
-            Grid.SetColumn(Recieve, 1);
+            //Sumary.Children.Add(Recieve);
+            //Grid.SetRow(Recieve, 1);
+            //Grid.SetColumn(Recieve, 1);
 
 
-            TextBlock OrderChange = new TextBlock();
-            OrderChange.Text = currentOrder.Change.ToString();
-            OrderChange.Style = Resources["LargeText"] as Style;
-            OrderChange.HorizontalAlignment = HorizontalAlignment.Right;
-            OrderChange.Padding = new Thickness(0, 0, 10, 0);
+            //TextBlock OrderChange = new TextBlock();
+            //OrderChange.Text = currentOrder.Change.ToString();
+            //OrderChange.Style = Resources["LargeText"] as Style;
+            //OrderChange.HorizontalAlignment = HorizontalAlignment.Right;
+            //OrderChange.Padding = new Thickness(0, 0, 10, 0);
 
-            Sumary.Children.Add(OrderChange);
-            Grid.SetRow(OrderChange, 2);
-            Grid.SetColumn(OrderChange, 1);
+            //Sumary.Children.Add(OrderChange);
+            //Grid.SetRow(OrderChange, 2);
+            //Grid.SetColumn(OrderChange, 1);
+
+            currentOrder.Notify("Change");
+            currentOrder.Notify("OrderSum");
+            currentOrder.Notify("Quantity");
 
 
         }
@@ -240,8 +257,12 @@ namespace K17_NMCNPM33_group17_CanteenApp
             }
             finally
             {
-                currentOrder.Notify("Change");
+                //currentOrder.Notify("Change");
                 //SetOrderList();
+
+                currentOrder.Notify("Change");
+                currentOrder.Notify("OrderSum");
+                currentOrder.Notify("Quantity");
             }
             
         }
@@ -319,16 +340,40 @@ namespace K17_NMCNPM33_group17_CanteenApp
             var button = sender as Button;
             currentOrder.detail.RemoveAt(int.Parse(button.Tag.ToString()));
             SetOrderList();
+
+            currentOrder.Notify("Change");
+            currentOrder.Notify("OrderSum");
+            currentOrder.Notify("Quantity");
+
+            
         }
 
         private void ChangeQuantity_TextChange(object sender, TextChangedEventArgs e)
         {
             var textbox = sender as TextBox;
             int index = int.Parse(textbox.Tag.ToString());
-            int newQuanity = int.Parse(textbox.Text);
-            currentOrder.detail[index].quantity = newQuanity;
+            int newQuanity = 0;
+            try
+            {
+                newQuanity = int.Parse(textbox.Text);
+            }
+            catch
+            {
 
+            }
+            finally
+            {
+                currentOrder.detail[index].quantity = newQuanity;
 
+                TextBlock Number = OrderList.Children[index * 5 + 3] as TextBlock;
+                Number.Text = (newQuanity * currentOrder.detail[index].product.price).ToString();
+
+                currentOrder.Notify("Change");
+                currentOrder.Notify("OrderSum");
+                currentOrder.Notify("Quantity");
+            }
+            
+            
         }
     }
 }
