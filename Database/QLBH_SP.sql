@@ -106,7 +106,7 @@ IF OBJECT_ID ('SP_ThemSanPham')
 IS NOT NULL
 DROP PROCEDURE SP_ThemSanPham
 GO
-CREATE PROCEDURE SP_ThemSanPham @MaSP NVARCHAR(8), @TenSP NVARCHAR(100), @LOAI NVARCHAR(6), @GiaMua INT, @TinhTrang NVARCHAR(20), @isDelete BIT,
+CREATE PROCEDURE SP_ThemSanPham @MaSP NVARCHAR(8), @TenSP NVARCHAR(100), @LOAI NVARCHAR(6), @GiaMua INT, @avatar Nchar(50),@TinhTrang NVARCHAR(20), @isDelete BIT,
     @isNew BIT, @TimeCreated DATETIME, @TimeUpdated DATETIME
 AS
 	IF @LOAI NOT IN (SELECT MaLoaiSP FROM LOAISP)
@@ -121,8 +121,9 @@ AS
 	END
 	ELSE
 	BEGIN
+	SET @avatar = 'Database/' + @avatar
 	INSERT INTO SANPHAM
-	VALUES ( @MaSP, @TenSP, @LOAI , @GiaMua, @TinhTrang, @isDelete, @isNew, @TimeCreated, @TimeUpdated)
+	VALUES ( @MaSP, @TenSP, @LOAI , @GiaMua,  @avatar, @TinhTrang, @isDelete, @isNew, @TimeCreated, @TimeUpdated)
 	END
 GO
 --9. Thêm đơn hàng
@@ -152,3 +153,25 @@ AS
 	END
 GO
 --10.Thêm chi tiết đơn hàng
+IF OBJECT_ID ('SP_ThemChiTietDonHang')
+IS NOT NULL
+DROP PROCEDURE SP_ThemChiTietDonHang
+GO
+CREATE PROCEDURE SP_ThemChiTietDonHang @MaDH CHAR(6), @MaSP NVARCHAR(8), @GiaBan INT, @SL INT
+AS
+	IF @MaDH NOT IN (SELECT MaDH FROM DON_HANG)
+	BEGIN
+		PRINT N'Không tồn tại đơn hàng!'
+		RETURN
+	END
+	ELSE IF @MaSP NOT IN (SELECT MaSP FROM SANPHAM)
+	BEGIN
+		PRINT N'Không tồn tại sản phẩm!'
+		RETURN
+	END
+	ELSE
+	BEGIN
+	INSERT INTO DONHANG_SP
+	VALUES ( @MaDH , @MaSP, @GiaBan, @SL)
+	END
+GO
