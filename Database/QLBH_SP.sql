@@ -151,25 +151,3 @@ AS
 	END
 GO
 --10.Thêm chi tiết đơn hàng
-IF OBJECT_ID ('SP_ThemChiTietDonHang')
-IS NOT NULL
-DROP PROCEDURE SP_ThemChiTietDonHang
-GO
-CREATE PROCEDURE SP_ThemChiTietDonHang @MaDH CHAR(6), @MaSP NVARCHAR(8), @GiaBan INT, @SL INT
-AS
-	IF @MaDH NOT IN (SELECT MaDH FROM DON_HANG)
-	BEGIN
-		PRINT N'Không tồn tại đơn hàng!'
-		RETURN
-	END
-	ELSE IF @MaSP NOT IN (SELECT MaSP FROM SANPHAM)
-	BEGIN
-		PRINT N'Không tồn tại sản phẩm!'
-		RETURN
-	END
-	ELSE
-	BEGIN
-	INSERT INTO DONHANG_SP
-	VALUES ( @MaDH , @MaSP, @GiaBan, @SL)
-	END
-GO

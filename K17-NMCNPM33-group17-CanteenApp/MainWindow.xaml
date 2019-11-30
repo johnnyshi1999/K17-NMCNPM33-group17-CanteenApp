@@ -5,9 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:K17_NMCNPM33_group17_CanteenApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1054" Width="1440"
-        Loaded="Window_Loaded"
-        Closing="Window_Closing">
+        Title="MainWindow" Height="1054" Width="1440">
 
     <Window.Resources>
         <Style x:Key="SectionBorder" TargetType="{x:Type Border }">
@@ -263,8 +261,7 @@
                             HorizontalAlignment="Left">
 
                                 <Button x:Name="NewOrderButton" Style="{DynamicResource RedFormatButton}" Margin="10,0,10,0"
-                            Width="207" Height="62"
-                                        Click="NewOrder_Click">
+                            Width="207" Height="62">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="Images/new-order.png"
                                                Width="52" Height="52"
@@ -274,8 +271,7 @@
                                 </Button>
 
                                 <Button x:Name="DeleteOrderButton" Style="{DynamicResource RedFormatButton}"  Margin="10,0,10,0"
-                            Width="207" Height="62"
-                                        Click="DeleteOrder_Click">
+                            Width="207" Height="62">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="Images/delete-order.png"
                                                Width="52" Height="52"
@@ -393,29 +389,24 @@
                                     <Canvas>
                                         <TextBlock Text="Số thứ tự" Style="{DynamicResource MediumText}" Canvas.Left="69" Canvas.Top="16"/>
                                         <TextBlock Text="Ngày" Style="{DynamicResource MediumText}" Canvas.Left="69" Canvas.Top="63" RenderTransformOrigin="1.031,-0.547"/>
-                                        <TextBlock x:Name ="DateTextBlock" Style="{DynamicResource MediumText}" Canvas.Left="255" Canvas.Top="69" RenderTransformOrigin="0.526,1.173"/>
-                                        <TextBox Name ="CurrentNumberTextBox" Height="42" Width="43" FontSize="25" 
+                                        <TextBlock x:Name ="DateTextBlock" Text="2/12/2019" Style="{DynamicResource MediumText}" Canvas.Left="255" Canvas.Top="69" RenderTransformOrigin="0.526,1.173"/>
+                                        <TextBox Height="42" Width="43" Text="30" FontSize="25" 
                                          VerticalAlignment="Center" HorizontalAlignment="Center"
-                                         TextChanged="CurrentNumberTextBox_TextChanged"
                                          Canvas.Left="280" Canvas.Top="19"/>
                                         <Button x:Name="IncreaseNumerButton"
-                                                Click="ChangeNumber_Click"
                                         Width="45" Height="45" Style="{DynamicResource BlueFormatButton}" Canvas.Left="348" Canvas.Top="16">
                                     <Image Source="Images/plus-sign.png" RenderOptions.BitmapScalingMode="Fant"/>
                                 </Button>
 
                                         <Button x:Name="DecreaseNumerButton"
-                                        Width="45" Height="45" Style="{DynamicResource BlueFormatButton}" 
-                                                Click="ChangeNumber_Click"
-                                                Canvas.Left="208" Canvas.Top="16">
+                                        Width="45" Height="45" Style="{DynamicResource BlueFormatButton}" Canvas.Left="208" Canvas.Top="16">
                                             <Image Source="Images/minus-sign.png" RenderOptions.BitmapScalingMode="Fant"/>
                                         </Button>
                                     </Canvas>
                                 </Border>
 
                                 <Button Style="{DynamicResource RedFormatButton}"
-                                Width="207" Height="62" Canvas.Left="50" Canvas.Top="113"
-                                        Click="SaveOrder_Click">
+                                Width="207" Height="62" Canvas.Left="50" Canvas.Top="113">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="Images/printer-order.png" RenderOptions.BitmapScalingMode="Fant"/>
                                         <TextBlock Text="In Order" Padding="5,0,0,0" VerticalAlignment="Center"/>

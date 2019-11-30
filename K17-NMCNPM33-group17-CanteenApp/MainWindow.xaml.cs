@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,10 +28,6 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
         Order currentOrder;
 
-        DateTime currentDate { get; set; }
-
-        int currentNumber { get; set; }
-
         public MainWindow()
         {
             InitializeComponent();
@@ -40,11 +35,6 @@ namespace K17_NMCNPM33_group17_CanteenApp
             db = DatabaseHandler.getInstance();
 
             db.connection.Open();
-
-            
-
-
-
             //string SQLSelect = "Select * From SANPHAM";
             //SqlCommand cmd = new SqlCommand(SQLSelect, db.connection);
             //SqlDataReader dr = cmd.ExecuteReader();
@@ -97,11 +87,8 @@ namespace K17_NMCNPM33_group17_CanteenApp
             // Bind the new data source to the myText TextBlock control's Text dependency property.
             QuantityTextBlock.SetBinding(TextBlock.TextProperty, QuantityBinding);
 
-            
-
             setSearchProductList(dt);
 
-            db.connection.Close();
 
         }
 
@@ -387,140 +374,6 @@ namespace K17_NMCNPM33_group17_CanteenApp
             }
             
             
-        }
-
-        private void CurrentNumberTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-                currentNumber = int.Parse(CurrentNumberTextBox.Text);
-            }
-            catch
-            {
-                //currentNumber = 0;
-            }
-            finally
-            {
-                currentOrder.number = currentNumber;
-            }
-        }
-
-        private void SaveOrder_Click(object sender, RoutedEventArgs e)
-        {
-            string ID = currentDate.Day.ToString() + currentDate.Month.ToString() + currentNumber.ToString();
-
-            if (currentOrder.OrderID == ID)
-            {
-                return;
-            }
-            currentOrder.OrderID = ID;
-            currentOrder.TimeCreated = currentDate;
-
-            db.connection.Open();
-            SqlCommand cmd = new SqlCommand("SP_ThemDonHang", db.connection);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@MaDH", SqlDbType.Char).Value = ID;
-            cmd.Parameters.AddWithValue("@STT", SqlDbType.Int).Value = currentOrder.number;
-            cmd.Parameters.AddWithValue("@ThoiGianNhap", SqlDbType.DateTime).Value = currentOrder.TimeCreated;
-            cmd.Parameters.AddWithValue("@NvNhap", SqlDbType.Char).Value = "SL01";
-            cmd.Parameters.AddWithValue("@TongTien", SqlDbType.Int).Value = currentOrder.OrderSum;
-            cmd.Parameters.AddWithValue("@TienNhan", SqlDbType.Int).Value = currentOrder.Receive;
-            cmd.Parameters.AddWithValue("@TimeCreated", SqlDbType.DateTime).Value = currentOrder.TimeCreated;
-
-            cmd.ExecuteNonQuery();
-            //MessageBox.Show("Sales Order Detail Added");
-
-            for (int i = 0; i < currentOrder.detail.Count; i++)
-            {
-                cmd = new SqlCommand("SP_ThemChiTietDonHang", db.connection);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@MaDH", SqlDbType.Char).Value = currentOrder.OrderID;
-                cmd.Parameters.AddWithValue("@MaSP", SqlDbType.NVarChar).Value = currentOrder.detail[i].product.ProductID;
-                cmd.Parameters.AddWithValue("@GiaBan", SqlDbType.Int).Value = currentOrder.detail[i].product.price;
-                cmd.Parameters.AddWithValue("@SL", SqlDbType.Int).Value = currentOrder.detail[i].quantity;
-                cmd.ExecuteNonQuery();
-            }
-            MessageBox.Show("Sales Order Saved");
-            db.connection.Close();
-        }
-
-        private void NewOrder_Click(object sender, RoutedEventArgs e)
-        {
-            currentOrder = new Order();
-            SetOrderList();
-            currentNumber++;
-            CurrentNumberTextBox.Text = currentNumber.ToString();
-        }
-
-        private void DeleteOrder_Click(object sender, RoutedEventArgs e)
-        {
-            currentOrder = new Order();
-            SetOrderList();
-        }
-
-        private void ChangeNumber_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender == DecreaseNumerButton)
-            {
-                currentNumber--;
-                
-            }
-            else
-            {
-                currentNumber++;
-            }
-
-            CurrentNumberTextBox.Text = currentNumber.ToString();
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            string filepath = $"{AppDomain.CurrentDomain.BaseDirectory}save.txt";
-            try
-            {
-                 var reader = new StreamReader(filepath);
-                var firstLine = reader.ReadLine();
-                currentNumber = int.Parse(firstLine);
-
-                currentDate = DateTime.Now;
-                var Date = reader.ReadLine();
-                DateTime ReadDate = DateTime.Parse(Date);
-
-
-                if (ReadDate.Date != currentDate.Date)
-                {
-                    currentNumber = 1;
-
-                }
-            }
-            catch
-            {
-                currentNumber = 1;
-                currentDate = DateTime.Now;
-            }
-            finally
-            {
-                CurrentNumberTextBox.Text = currentNumber.ToString();
-                DateTextBlock.Text = currentDate.Day + "/" + currentDate.Month + "/" + currentDate.Year;
-            }
-            
-            
-            
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            const string filename = "save.txt";
-
-            var writer = new StreamWriter(filename);
-            // Dong dau tien la luot di hien tai
-            writer.WriteLine(currentNumber);
-
-            // Theo sau la ngay hien tai
-            writer.WriteLine(currentDate.ToString());
-
-
-            writer.Close();
         }
     }
 }
