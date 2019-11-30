@@ -233,5 +233,10 @@ namespace K17_NMCNPM33_group17_CanteenApp
             currentOrder.detail[index].quantity = newQuanity;
 
         }
+
+        private void BtnPay_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -14,6 +14,8 @@ AS
 	FROM (SANPHAM JOIN SP_TrungBay ON SANPHAM.MASP = SP_TrungBay.MaSP)
 GO
 
+EXEC SP_DanhSachSP
+
 --1. Tìm sản phẩm theo mã sản phẩm
 IF OBJECT_ID ('SP_SanPhamTheoMa')
 IS NOT NULL

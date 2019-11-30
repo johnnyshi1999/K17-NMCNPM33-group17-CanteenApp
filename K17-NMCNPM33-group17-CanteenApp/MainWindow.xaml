@@ -135,7 +135,7 @@
 
                     <Canvas x:Name ="MainCanvas" Canvas.Left="98" Canvas.Top="0" Width="1326">
                         <Border Style="{DynamicResource SectionBorder}" Width="700" Height="686"
-                                Canvas.Left="612" Canvas.Top="80" >
+                                Canvas.Left="612" Canvas.Top="80" BorderThickness="2" >
                             <Canvas>
                                 <Grid Canvas.Top="0" Canvas.Left="0"
                                       Width="698" Height="Auto">
@@ -180,6 +180,52 @@
 
 
                                 </Grid>
+                                <Border Background="White" BorderThickness="0,0,0,2"
+                                        BorderBrush="Black"
+                                        CornerRadius="10" Canvas.Top="654"
+                                        Height="30" Width="697" Canvas.Left="0">
+                                    <Grid ShowGridLines="True" Margin="286,0,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="0.5*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Text="Số thứ tự" Style="{DynamicResource SmallText}"
+                                           Grid.Column="0" Grid.Row="0"
+                                           HorizontalAlignment="Center"
+                                           Canvas.Left="69" Canvas.Top="16"/>
+                                        <TextBlock Text="30" Style="{DynamicResource SmallText}"
+                                           Grid.Column="1" Grid.Row="0"
+                                           HorizontalAlignment="Center"
+                                           Canvas.Left="295" Canvas.Top="16"/>
+                                        <TextBlock Text="Ngày" Style="{DynamicResource SmallText}"
+                                           Grid.Column="2" Grid.Row="0"
+                                           HorizontalAlignment="Center"
+                                           Canvas.Left="69" Canvas.Top="62"/>
+                                        <TextBlock x:Name ="DateTextBlock" Style="{DynamicResource SmallText}"
+                                                   Text="2/12/2019" Grid.Column="3" Grid.Row="0"
+                                                   HorizontalAlignment="Center"
+                                                   Canvas.Left="255" Canvas.Top="62" />
+
+                                        <!--<TextBox Height="42" Width="43" Text="30" FontSize="25" 
+                                         VerticalAlignment="Center" HorizontalAlignment="Center"
+                                         Canvas.Left="280" Canvas.Top="19"/>-->
+                                        <!--<Button x:Name="IncreaseNumerButton"
+                                        Width="45" Height="45" Style="{DynamicResource BlueFormatButton}" Canvas.Left="348" Canvas.Top="16">
+                                    <Image Source="Images/plus-sign.png" RenderOptions.BitmapScalingMode="Fant"/>
+                                </Button>
+
+                                <Button x:Name="DecreaseNumerButton"
+                                        Width="45" Height="45" Style="{DynamicResource BlueFormatButton}" Canvas.Left="208" Canvas.Top="16">
+                                    <Image Source="Images/minus-sign.png" RenderOptions.BitmapScalingMode="Fant"/>
+                                </Button>-->
+                                    </Grid>
+                                </Border>
 
                             </Canvas>
 
@@ -311,64 +357,27 @@
                                 </Grid>
                             </Canvas>
                         </Border>
-                        <Button Style="{DynamicResource RedFormatButton}"
-                                Width="207" Height="62" Canvas.Left="636" Canvas.Top="831">
-                            <StackPanel Orientation="Horizontal">
+                        <Button x:Name="btnPrintBill" Style="{DynamicResource RedFormatButton}"
+                                Width="150" Height="120" Canvas.Left="785" Canvas.Top="786">
+                            <StackPanel Orientation="Vertical">
                                 <Image Source="Images/printer-order.png"
                                        Width="50" Height="50"
                                        RenderOptions.BitmapScalingMode="Fant"/>
-                                <TextBlock Text="In Order" Padding="8,0,0,0" VerticalAlignment="Center"/>
+                                <TextBlock Text="In Order" VerticalAlignment="Center" Margin="0,5,0,0"/>
                             </StackPanel>
                         </Button>
-                        <Button Style="{DynamicResource RedFormatButton}"
-                                Width="207" Height="62" Canvas.Left="646" Canvas.Top="771">
-                            <TextBlock Text="Thanh toán" VerticalAlignment="Center"/>
+                        <Button x:Name="btnPay" Style="{DynamicResource RedFormatButton}"
+                                Width="150" Height="120" Canvas.Left="625" Canvas.Top="786" Click="BtnPay_Click"
+                                >
+                            <StackPanel Orientation="Vertical">
+                                <Image Width="50" Height="50"
+                                       RenderOptions.BitmapScalingMode="Fant"
+                                       Source="Images/coin.png"/>
+                                <TextBlock 
+                                    Text="Thanh toán" TextWrapping="Wrap"
+                                    TextAlignment="Center" Margin="0,5,0,0"/>
+                            </StackPanel>
                         </Button>
-                        <Border Background="White" BorderBrush="Black" BorderThickness="2"
-                                CornerRadius="10" Canvas.Left="708" Canvas.Top="282"
-                                Height="110" Width="399">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="2*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                 
-                                <TextBlock Text="Số thứ tự" Style="{DynamicResource MediumText}"
-                                           Grid.Column="0" Grid.Row="0"
-                                           HorizontalAlignment="Center"
-                                           Canvas.Left="69" Canvas.Top="16"/>
-                                <TextBlock Text="30" Style="{DynamicResource MediumText}"
-                                           Grid.Column="1" Grid.Row="0"
-                                           HorizontalAlignment="Center"
-                                           Canvas.Left="295" Canvas.Top="16"/>
-                                <TextBlock Text="Ngày" Style="{DynamicResource MediumText}"
-                                           Grid.Column="0" Grid.Row="1"
-                                           HorizontalAlignment="Center"
-                                           Canvas.Left="69" Canvas.Top="62"/>
-                                <TextBlock x:Name ="DateTextBlock" Text="2/12/2019"
-                                           Style="{DynamicResource MediumText}"
-                                           Grid.Column="1" Grid.Row="1"
-                                           HorizontalAlignment="Center"
-                                           Canvas.Left="255" Canvas.Top="62" />
-
-                                <!--<TextBox Height="42" Width="43" Text="30" FontSize="25" 
-                                         VerticalAlignment="Center" HorizontalAlignment="Center"
-                                         Canvas.Left="280" Canvas.Top="19"/>-->
-                                <!--<Button x:Name="IncreaseNumerButton"
-                                        Width="45" Height="45" Style="{DynamicResource BlueFormatButton}" Canvas.Left="348" Canvas.Top="16">
-                                    <Image Source="Images/plus-sign.png" RenderOptions.BitmapScalingMode="Fant"/>
-                                </Button>
-
-                                <Button x:Name="DecreaseNumerButton"
-                                        Width="45" Height="45" Style="{DynamicResource BlueFormatButton}" Canvas.Left="208" Canvas.Top="16">
-                                    <Image Source="Images/minus-sign.png" RenderOptions.BitmapScalingMode="Fant"/>
-                                </Button>-->
-                            </Grid>
-                        </Border>
                         <Border Style="{DynamicResource ResourceKey=SectionBorder}"
                                         Canvas.Left="962" Canvas.Top="778"
                                         Height="130" Width="348">
@@ -388,7 +397,7 @@
                                 <TextBlock Style="{DynamicResource LargeText}"
                                            HorizontalAlignment="Center" VerticalAlignment="Center" Text="Tổng"
                                            Grid.Column="0" Grid.Row="0" />
-                                
+
                                 <TextBlock Style="{DynamicResource LargeText}" 
                                            HorizontalAlignment="Center" VerticalAlignment="Center" Text="Nhận"
                                            Grid.Column="0" Grid.Row="1"/>
