@@ -485,7 +485,8 @@
                        BorderBrush="Black" BorderThickness="2" CornerRadius="30" Canvas.Top="-54">
                                 <Canvas>
                                     <TextBlock Text="Ngày" Style="{DynamicResource MediumText}" Canvas.Left="583" Canvas.Top="57" RenderTransformOrigin="1.031,-0.547"></TextBlock>
-                                    <TextBox Width="382" Height="60" Canvas.Left="699" Canvas.Top="30"></TextBox>
+                                    
+                                    <TextBox Name="statisticDate" Text="{Binding Path=DateTimeValue, StringFormat=dd-MM-yyyy}" Height="52" Width="411" Canvas.Left="679" Canvas.Top="39" />
                                     <Button x:Name="SearchStatisticButton" Style="{DynamicResource BlueFormatButton}"
                                         Width="62" Height="60" RenderTransformOrigin="6.126,1.348"
                                         Canvas.Left="1127" Canvas.Top="30" Click="SearchStatisticButton_Click">

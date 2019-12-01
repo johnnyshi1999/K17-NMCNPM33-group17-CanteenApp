@@ -27,6 +27,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
     {
         DatabaseHandler db;
         List<Product> productList;
+        List<Order> StatisticList;
         Account currentAccount;
 
         Order currentOrder;
@@ -82,6 +83,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
             //DataListView.SetBinding(ItemsControl.ItemsSourceProperty, new Binding { Source = dt });
 
             productList = new List<Product>();
+             StatisticList = new List<Order>();
             currentOrder = new Order();
             
             SqlCommand cmd = new SqlCommand("SP_DanhSachSP", db.connection);
@@ -661,8 +663,8 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
             db.connection.Open();
 
-            productList = new List<Product>();
-            currentOrder = new Order();
+            StatisticList = new List<Order>();
+         
 
             SqlCommand cmd = new SqlCommand("SP_DanhSachDonHang", db.connection);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -679,29 +681,78 @@ namespace K17_NMCNPM33_group17_CanteenApp
         private void setSearchResultStatisticList(DataTable dts)
         {
             RegexOptions options = RegexOptions.Multiline | RegexOptions.IgnoreCase;
-            //string pattern = txtBoxInputSearch.Text;
-            string pattern = null;
+            string pattern = statisticDate.Text;
+           
            
 
             for (int i = 0; i < dts.Rows.Count; i++)
             {
-                string src = dts.Rows[i][1].ToString();
+                DateTime time = (DateTime)dts.Rows[i][1];
+                string src = time.ToString("dd-MM-yyyy"); ;
                 if (Regex.IsMatch(src, pattern, options))
                 {
                     Order order = new Order()
                     {
                         OrderID = dts.Rows[i][0].ToString(),
-                        //TimeCreated = dts.Rows[i][1].ToDateTime,
+                        TimeCreated = (DateTime)dts.Rows[i][1],
                         Employee = dts.Rows[i][2].ToString(),
                         OrderSum = int.Parse(dts.Rows[i][3].ToString()),
                     };
-                    //productList.Add(product);
+                    StatisticList.Add(order);
                 }
             }
 
-            //loadProductListIntoGrid();
+            loadStatisticListIntoGrid();
         }
+        private void loadStatisticListIntoGrid()
+        {
 
+            ProductListGrid.Children.Clear();
+            ProductListGrid.RowDefinitions.Clear();
+
+            for (int i = 0; i < StatisticList.Count; i++)
+            {
+                TextBlock orderID = new TextBlock();
+                orderID.Text = StatisticList[i].OrderID.ToString();
+                orderID.Style = Resources["SmallText"] as Style;
+
+                ProductListGrid.Children.Add(orderID);
+
+                Grid.SetRow(orderID, i);
+                Grid.SetColumn(orderID, 0);
+
+                TextBlock employee = new TextBlock();
+                employee.Text = StatisticList[i].Employee;
+                employee.HorizontalAlignment = HorizontalAlignment.Right;
+                employee.Margin = new Thickness(0, 0, 10, 0);
+                employee.Style = Resources["SmallText"] as Style;
+                employee.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2413E3"));
+
+                ProductListGrid.Children.Add(employee);
+
+                Grid.SetRow(employee, i);
+                Grid.SetColumn(employee, 1);
+
+                TextBlock oderSum = new TextBlock();
+                oderSum.Text = StatisticList[i].OrderSum.ToString();
+                oderSum.Style = Resources["SmallText"] as Style;
+
+                ProductListGrid.Children.Add(oderSum);
+
+                Grid.SetRow(oderSum, i);
+                Grid.SetColumn(oderSum, 2);
+
+                TextBlock timeCreated = new TextBlock();
+                timeCreated.Text = StatisticList[i].TimeCreated.ToString("dd MMMM yyyy hh:mm:ss tt");
+                timeCreated.Style = Resources["SmallText"] as Style;
+
+                ProductListGrid.Children.Add(timeCreated);
+
+                Grid.SetRow(timeCreated, i);
+                Grid.SetColumn(timeCreated, 3);
+
+            }
+        }
         private void AccountInfo_Click(object sender, RoutedEventArgs e)
         {
 

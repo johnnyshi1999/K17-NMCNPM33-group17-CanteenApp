@@ -51,7 +51,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
             }
             set
             {
-            
+                OrderSum = value;
             }
            
         }
