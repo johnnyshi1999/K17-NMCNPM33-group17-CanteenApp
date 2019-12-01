@@ -285,6 +285,62 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 productList.Add(product);
             }
 
+            loadProductListIntoGrid();
+
+
+            /*ProductListGrid.Children.Clear();
+            ProductListGrid.RowDefinitions.Clear();
+
+            for (int i = 0; i < productList.Count; i++)
+            {
+                TextBlock productName = new TextBlock();
+                productName.Text = productList[i].ProductName;
+                productName.Style = Resources["SmallText"] as Style;
+
+                ProductListGrid.Children.Add(productName);
+
+                Grid.SetRow(productName, i);
+                Grid.SetColumn(productName, 0);
+
+                TextBlock productPrice = new TextBlock();
+                productPrice.Text = productList[i].price.ToString();
+                productPrice.Style = Resources["SmallText"] as Style;
+                productPrice.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2413E3"));
+
+                ProductListGrid.Children.Add(productPrice);
+
+                Grid.SetRow(productPrice, i);
+                Grid.SetColumn(productPrice, 1);
+
+                Button AddButton = new Button()
+                {
+                    Content = new Image
+                    {
+                        Source = new BitmapImage(new Uri("Images/add-button.png", UriKind.Relative)),
+                        VerticalAlignment = VerticalAlignment.Center
+                    }
+
+                };
+                AddButton.Background = null;
+                AddButton.BorderThickness = new Thickness(0, 0, 0, 0);
+                AddButton.Tag = i;
+                AddButton.Click += AddProduct_Click;
+
+                ProductListGrid.Children.Add(AddButton);
+
+                Grid.SetRow(AddButton, i);
+                Grid.SetColumn(AddButton, 2);
+
+                ProductListGrid.RowDefinitions.Add(new RowDefinition());
+
+            }*/
+
+
+        }
+
+        private void loadProductListIntoGrid()
+        {
+
             ProductListGrid.Children.Clear();
             ProductListGrid.RowDefinitions.Clear();
 
@@ -331,10 +387,9 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 ProductListGrid.RowDefinitions.Add(new RowDefinition());
 
             }
-
         }
 
-		private void DeleteProduct_Click(object sender, RoutedEventArgs e)
+        private void DeleteProduct_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
             currentOrder.detail.RemoveAt(int.Parse(button.Tag.ToString()));
@@ -512,11 +567,53 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
         }
 
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        void setSearchResultProductList(DataTable dt)
         {
             RegexOptions options = RegexOptions.Multiline | RegexOptions.IgnoreCase;
-            string searchQuery = txtBoxInputSearch.Text;
+            string pattern = txtBoxInputSearch.Text;
 
+            if (productList.Count != 0)
+                productList.Clear();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                string src = dt.Rows[i][1].ToString();
+                if (Regex.IsMatch(src, pattern, options))
+                {
+                    Product product = new Product()
+                    {
+                        ProductID = dt.Rows[i][0].ToString(),
+                        ProductName = dt.Rows[i][1].ToString(),
+                        type = Product.typeStringToInt(dt.Rows[i][2].ToString()),
+                        price = int.Parse(dt.Rows[i][3].ToString()),
+                    };
+                    productList.Add(product);
+                }
+            }
+
+            loadProductListIntoGrid();
         }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            db = DatabaseHandler.getInstance();
+
+            db.connection.Open();
+
+            productList = new List<Product>();
+            currentOrder = new Order();
+
+            SqlCommand cmd = new SqlCommand("SP_DanhSachSP", db.connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            
+            SqlDataReader dr = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            
+            setSearchResultProductList(dt);
+
+            db.connection.Close();
+        }
+    
     }
 }

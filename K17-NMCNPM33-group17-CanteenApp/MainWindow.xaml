@@ -252,7 +252,8 @@
                             HorizontalAlignment="Left">
 
                                 <Button x:Name="NewOrderButton" Style="{DynamicResource RedFormatButton}"
-                                        Margin="10,0" Width="207" Height="62">
+                                        Margin="10,0" Width="207" Height="62"
+                                        Click="NewOrder_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="Images/new-order.png"
                                                Width="52" Height="52"
@@ -263,7 +264,8 @@
 
                                 <Button x:Name="DeleteOrderButton" Style="{DynamicResource RedFormatButton}"
                                         Margin="10,0"
-                                        Width="207" Height="62">
+                                        Width="207" Height="62"
+                                        Click="DeleteOrder_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="Images/delete-order.png"
                                                Width="52" Height="52"
@@ -372,7 +374,8 @@
                             </Canvas>
                         </Border>
                         <Button x:Name="btnPrintBill" Style="{DynamicResource RedFormatButton}"
-                                Width="116" Height="120" Canvas.Left="757" Canvas.Top="786">
+                                Width="116" Height="120" Canvas.Left="757" Canvas.Top="786"
+                                Click="SaveOrder_Click">
                             <StackPanel Orientation="Vertical">
                                 <Image Source="Images/printer-order.png"
                                        Width="50" Height="50"
@@ -381,8 +384,8 @@
                             </StackPanel>
                         </Button>
                         <Button x:Name="btnPay" Style="{DynamicResource RedFormatButton}"
-                                Width="136" Height="120" Canvas.Left="613" Canvas.Top="786" Click="BtnPay_Click"
-                                >
+                                Width="136" Height="120" Canvas.Left="613" Canvas.Top="786"
+                                Click="BtnPay_Click">
                             <StackPanel Orientation="Vertical">
                                 <Image Width="50" Height="50"
                                        RenderOptions.BitmapScalingMode="Fant"
@@ -421,22 +424,22 @@
                                            Grid.Column="0" Grid.Row="2"/>
 
                                 <TextBlock x:Name="totalAmountDue" Style="{DynamicResource LargeText}"
-                                           Text="120000 VND" Margin="0,0,6,0"
+                                           Text="120000" Margin="0,0,6,0"
                                            HorizontalAlignment="Right" VerticalAlignment="Center"
                                            Grid.Column="1" Grid.Row="0" />
                                 <TextBox x:Name="receivedAmount"
-                                         Text="120000" Margin="0,6,77,4"
+                                         Text="120000" Margin="0,6,2,4"
                                          HorizontalAlignment="Right" VerticalAlignment="Center"
-                                         Grid.Column="1" Grid.Row="1" Width="234" Height="32"
+                                         Grid.Column="1" Grid.Row="1" Width="260" Height="32"
                                          FontSize="30" Padding="0,-6,0,0"
                                          HorizontalContentAlignment="Right"
                                          FontWeight="Bold" />
-                                <TextBlock x:Name="currencyUnit" Style="{DynamicResource LargeText}"
+                                <!--<TextBlock x:Name="currencyUnit" Style="{DynamicResource LargeText}"
                                            Text="VND" Margin="0,0,6,0"
                                            HorizontalAlignment="Right" VerticalAlignment="Center"
-                                           Grid.Column="1" Grid.Row="1" />
+                                           Grid.Column="1" Grid.Row="1" />-->
                                 <TextBlock x:Name="changeAmount" Style="{DynamicResource LargeText}"
-                                           Text="0 VND" Margin="0,0,6,0"
+                                           Text="0" Margin="0,0,6,0"
                                            HorizontalAlignment="Right" VerticalAlignment="Center"
                                            Grid.Column="1" Grid.Row="2" />
 
