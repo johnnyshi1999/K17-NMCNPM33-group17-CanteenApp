@@ -27,16 +27,27 @@ namespace K17_NMCNPM33_group17_CanteenApp
     {
         DatabaseHandler db;
         List<Product> productList;
+        Account currentAccount;
 
         Order currentOrder;
 		DateTime currentDate { get; set; }
 		int currentNumber { get; set; }
 
         bool[] searchTypeTicked;
-		
-		public MainWindow()
+
+        public MainWindow()
         {
             InitializeComponent();
+
+            Login login = new Login();
+            if (login.ShowDialog() != true)
+            {
+                return;
+            }
+            else
+            {
+                currentAccount = login.account;
+            }
 
             searchTypeTicked = new bool[3];
 
@@ -529,6 +540,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 currentDate = DateTime.Now;
                 var Date = reader.ReadLine();
                 DateTime ReadDate = DateTime.Parse(Date);
+                reader.Close();
 
 
                 if (ReadDate.Date != currentDate.Date)
@@ -546,6 +558,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
             {
                 txtBoxCurrentNumber.Text = currentNumber.ToString();
                 DateTextBlock.Text = currentDate.Day + "/" + currentDate.Month + "/" + currentDate.Year;
+                
             }
             
             
@@ -685,6 +698,26 @@ namespace K17_NMCNPM33_group17_CanteenApp
             }
 
             //loadProductListIntoGrid();
+        }
+
+        private void AccountInfo_Click(object sender, RoutedEventArgs e)
+        {
+
+            MessageBox.Show($"Account ID: {currentAccount.AccountID}\n" +
+                $"Name: {currentAccount.Name}\n");
+        }
+
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            Login login = new Login();
+            if (login.ShowDialog() == true)
+            {
+                currentAccount = login.account;
+            }
+            else
+            {
+                this.Close();
+            }
         }
     }
 }

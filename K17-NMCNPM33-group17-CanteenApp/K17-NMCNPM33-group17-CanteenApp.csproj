@@ -57,6 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Account.cs" />
     <Compile Include="DatabaseHandler.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="PaymentWindow.xaml.cs">
@@ -182,6 +183,9 @@
     <Resource Include="Images\coin.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\account.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

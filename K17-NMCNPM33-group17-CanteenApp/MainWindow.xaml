@@ -111,6 +111,17 @@
 
         <Canvas Height="1024" Width="1440">
             <Rectangle Fill="#183557" Width="100" Height="1024"/>
+            <Rectangle Fill="#DF0000" Width="1342" Height="98" Canvas.Left="100"/>
+            <Button Background="Transparent" Canvas.Left="1165" Canvas.Top="20" BorderThickness="0"
+                    Click="AccountInfo_Click">
+                <Image Source="Images/account.png" 
+                       RenderOptions.BitmapScalingMode="Fant" Height="60" Width="60" RenderTransformOrigin="0.5,0.5">
+                </Image>
+            </Button>
+
+            <Button Style="{StaticResource BlueFormatButton}" Content="Đăng xuất" Canvas.Left="1245" Canvas.Top="20"
+                    Height="62" Width="170"
+                    Click="LogOut_Click"/>
             <TabControl x:Name="TabMenu" TabStripPlacement="Left" Height="926" Width="1440" Canvas.Top="98">
                 <TabControl.Resources>
                     <Style TargetType="{x:Type TabItem}">
@@ -303,7 +314,7 @@
                                 <Border Canvas.Left="15" Canvas.Top="44"
                                         Width="445" Height="60"
                                         BorderBrush="Black" BorderThickness="1">
-                                    <TextBox Text="Bún bò Huế" BorderThickness="2" 
+                                    <TextBox BorderThickness="2" 
                                              x:Name="txtBoxInputSearch" BorderBrush="Black"
                                              SelectionOpacity="0.5" FontSize="32" Padding="5,5,0,0"
                                              KeyDown="TxtBoxInputSearch_KeyDown"
@@ -367,15 +378,17 @@
                                     </ListView.ItemContainerStyle>
                                 </ListView>-->
 
-                                <Grid Name="ProductListGrid" Height="340" Width="558"
-                                      ShowGridLines="True"
-                                      Canvas.Left="8" Canvas.Top="171">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="2*"></ColumnDefinition>
-                                        <ColumnDefinition Width="2*"></ColumnDefinition>
-                                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                </Grid>
+                                <ScrollViewer
+                                    Height="Auto" Width="558" Canvas.Left="8" Canvas.Top="171">
+                                    <Grid Name="ProductListGrid" Height="Auto" Width="558">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                    </Grid>
+                                </ScrollViewer>
+
                             </Canvas>
                         </Border>
                         <Button x:Name="btnPrintBill" Style="{DynamicResource RedFormatButton}"
