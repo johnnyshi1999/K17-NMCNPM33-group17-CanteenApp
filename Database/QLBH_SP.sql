@@ -177,3 +177,14 @@ AS
 	VALUES ( @MaDH , @MaSP, @GiaBan, @SL)
 	END
 GO
+
+--11. Tìm danh sách đơn hàng theo ngày
+IF OBJECT_ID ('SP_DanhSachDonHang')
+IS NOT NULL
+DROP PROCEDURE SP_DanhSachDonHang
+GO
+CREATE PROCEDURE SP_DanhSachDonHang @TimeCreated DATETIME
+AS
+	SELECT * 
+	FROM DON_HANG WHERE @TimeCreated  = TimeCreated
+GO

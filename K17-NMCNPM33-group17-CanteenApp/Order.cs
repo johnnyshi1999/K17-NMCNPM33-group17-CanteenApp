@@ -20,7 +20,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
     {
         public string OrderID;
         public int number;
-        string Employee;
+        public string Employee;
 
         public DateTime TimeCreated;
         public List<OrderDetail> detail;
@@ -49,7 +49,13 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 }
                 return result;
             }
+            set
+            {
+            
+            }
+           
         }
+        
 
 
         public event PropertyChangedEventHandler PropertyChanged;
