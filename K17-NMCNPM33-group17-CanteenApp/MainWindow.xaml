@@ -464,8 +464,16 @@
                             <Border Background="#F3F3F3" Width="1235" Height="756" Canvas.Left="-30" 
                        BorderBrush="Black" BorderThickness="2" CornerRadius="30" Canvas.Top="-54">
                                 <Canvas>
-                                    <TextBlock Text="Ngày" Style="{DynamicResource MediumText}" Canvas.Left="689" Canvas.Top="57" RenderTransformOrigin="1.031,-0.547"></TextBlock>
-                                    <TextBox Width="382" Height="60" Canvas.Left="782" Canvas.Top="30"></TextBox>
+                                    <TextBlock Text="Ngày" Style="{DynamicResource MediumText}" Canvas.Left="583" Canvas.Top="57" RenderTransformOrigin="1.031,-0.547"></TextBlock>
+                                    <TextBox Width="382" Height="60" Canvas.Left="699" Canvas.Top="30"></TextBox>
+                                    <Button x:Name="SearchStatisticButton" Style="{DynamicResource BlueFormatButton}"
+                                        Width="62" Height="60" RenderTransformOrigin="6.126,1.348"
+                                        Canvas.Left="1127" Canvas.Top="30" Click="SearchStatisticButton_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="Images/search-product.png" Margin="5"
+                                               RenderOptions.BitmapScalingMode="Fant"/>
+                                        </StackPanel>
+                                    </Button>
                                     <!--<DataGrid HorizontalAlignment="Center" AutoGenerateColumns="False" 
                                         Name="dgUsers"
                                            ScrollViewer.CanContentScroll="True"         
@@ -492,7 +500,48 @@
                                             </Style>
                                         </DataGrid.ColumnHeaderStyle>
                                     </DataGrid>-->
+                                    <Grid Canvas.Top="150" Canvas.Left="20"
+                                      Width="1200" Height="50">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="3*" />
+                                            <ColumnDefinition Width="3*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Border BorderBrush="Black" BorderThickness="0,0,1,1" Grid.Column="0">
+                                            <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center"
+                                           Text="Giao dịch" Canvas.Left="129"  Canvas.Top="92" Padding="0,0,0,5" Margin="73,0,27.667,-0.667" VerticalAlignment="Top" Width="138"
+                                            />
+                                        </Border>
+                                        <Border BorderBrush="Black" BorderThickness="0,0,1,1" Grid.Column="1" >
+                                            <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center"
+                                           Text="Nhân viên" Canvas.Left="271" Canvas.Top="92" Padding="0,0,0,5"
+                                            />
+                                        </Border>
+                                        <Border BorderBrush="Black" BorderThickness="0,0,1,1" Grid.Column="2" >
+                                            <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center"
+                                           Text="Số tiền" Canvas.Left="348" Canvas.Top="91" Padding="0,0,0,5"
+                                            />
+                                        </Border>
+                                        <Border BorderBrush="Black" BorderThickness="0,0,0,1" Grid.Column="3" >
+                                            <TextBlock Style="{DynamicResource SmallText}" HorizontalAlignment="Center"
+                                                   Text="Thời gian" Canvas.Left="505" Canvas.Top="86" Padding="0,0,0,5"
+                                           />
+                                        </Border>
+                                    </Grid>
+                                    <Grid x:Name="statisticList" Width="1200" ShowGridLines="True"
+                                      Canvas.Left="20" Canvas.Top="206" Height="329" VerticalAlignment="Center">
 
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="3*" />
+                                            <ColumnDefinition Width="3*" />
+                                        </Grid.ColumnDefinitions>
+
+
+
+                                    </Grid>
                                     <Grid Name="StatisticsSumaray" Width="600"
                                         Height="120" Canvas.Left="44" Canvas.Top="540">
                                         <Grid.ColumnDefinitions>

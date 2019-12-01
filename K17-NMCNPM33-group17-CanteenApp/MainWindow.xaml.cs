@@ -614,6 +614,52 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
             db.connection.Close();
         }
-    
+
+        private void SearchStatisticButton_Click(object sender, RoutedEventArgs e)
+        {
+            db = DatabaseHandler.getInstance();
+
+            db.connection.Open();
+
+            productList = new List<Product>();
+            currentOrder = new Order();
+
+            SqlCommand cmd = new SqlCommand("SP_DanhSachDonHang", db.connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            SqlDataReader dr = cmd.ExecuteReader();
+            DataTable dts = new DataTable();
+            dts.Load(dr);
+
+            setSearchResultStatisticList(dts);
+
+            db.connection.Close();
+        }
+
+        private void setSearchResultStatisticList(DataTable dts)
+        {
+            RegexOptions options = RegexOptions.Multiline | RegexOptions.IgnoreCase;
+            //string pattern = txtBoxInputSearch.Text;
+
+           
+
+            for (int i = 0; i < dts.Rows.Count; i++)
+            {
+                string src = dts.Rows[i][1].ToString();
+                if (Regex.IsMatch(src, pattern, options))
+                {
+                    Order order = new Order()
+                    {
+                        OrderID = dts.Rows[i][0].ToString(),
+                        //TimeCreated = dts.Rows[i][1].ToDateTime,
+                        Employee = dts.Rows[i][2].ToString(),
+                        OrderSum = int.Parse(dts.Rows[i][3].ToString()),
+                    };
+                    //productList.Add(product);
+                }
+            }
+
+            //loadProductListIntoGrid();
+        }
     }
 }
