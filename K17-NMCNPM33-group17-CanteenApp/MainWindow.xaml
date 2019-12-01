@@ -433,12 +433,13 @@
                                            HorizontalAlignment="Right" VerticalAlignment="Center"
                                            Grid.Column="1" Grid.Row="0" />
                                 <TextBox x:Name="receivedAmount"
-                                         Text="120000" Margin="0,6,2,4"
+                                         Text="" Margin="0,6,2,4"
                                          HorizontalAlignment="Right" VerticalAlignment="Center"
                                          Grid.Column="1" Grid.Row="1" Width="260" Height="32"
                                          FontSize="30" Padding="0,-6,0,0"
                                          HorizontalContentAlignment="Right"
-                                         FontWeight="Bold" />
+                                         FontWeight="Bold"
+                                         TextChanged="ChangeReceive_TextChange"/>
                                 <!--<TextBlock x:Name="currencyUnit" Style="{DynamicResource LargeText}"
                                            Text="VND" Margin="0,0,6,0"
                                            HorizontalAlignment="Right" VerticalAlignment="Center"

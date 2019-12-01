@@ -245,7 +245,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
             currentOrder.Notify("Quantity");
 		}
 		
-		private void ChangeRecieve_TextChange(object sender, TextChangedEventArgs e)
+		private void ChangeReceive_TextChange(object sender, TextChangedEventArgs e)
         {
             try
             {
