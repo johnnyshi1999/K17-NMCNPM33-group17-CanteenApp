@@ -614,6 +614,14 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
             db.connection.Close();
         }
-    
+
+        private void TxtBoxInputSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SearchButton_Click(null, null);
+            }
+
+        }
     }
 }
