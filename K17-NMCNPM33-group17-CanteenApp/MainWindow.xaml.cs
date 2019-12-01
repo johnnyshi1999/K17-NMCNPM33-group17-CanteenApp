@@ -373,6 +373,8 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
                 TextBlock productPrice = new TextBlock();
                 productPrice.Text = productList[i].price.ToString();
+                productPrice.HorizontalAlignment = HorizontalAlignment.Right;
+                productPrice.Margin = new Thickness(0, 0, 10, 0);
                 productPrice.Style = Resources["SmallText"] as Style;
                 productPrice.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2413E3"));
 

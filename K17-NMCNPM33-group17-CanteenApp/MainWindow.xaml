@@ -159,8 +159,8 @@
                     </TabItem.Header>
 
                     <Canvas x:Name ="MainCanvas" Canvas.Left="98" Canvas.Top="0" Width="1326">
-                        <Border Style="{DynamicResource SectionBorder}" Width="700" Height="686"
-                                Canvas.Left="612" Canvas.Top="80" BorderThickness="2" >
+                        <Border Style="{DynamicResource SectionBorder}" Width="702" Height="686"
+                                Canvas.Left="610" Canvas.Top="80" BorderThickness="2" >
                             <Canvas>
                                 <Grid Canvas.Top="0" Canvas.Left="0"
                                       Width="698" Height="Auto">
@@ -380,7 +380,8 @@
 
                                 <ScrollViewer
                                     Height="Auto" Width="558" Canvas.Left="8" Canvas.Top="171">
-                                    <Grid Name="ProductListGrid" Height="Auto" Width="558">
+                                    <Grid Name="ProductListGrid" Height="Auto" Width="558"
+                                          ShowGridLines="True">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="2*"></ColumnDefinition>
                                             <ColumnDefinition Width="2*"></ColumnDefinition>
@@ -446,7 +447,7 @@
                                            HorizontalAlignment="Right" VerticalAlignment="Center"
                                            Grid.Column="1" Grid.Row="0" />
                                 <TextBox x:Name="receivedAmount"
-                                         Text="" Margin="0,6,2,4"
+                                         Text="" Margin="0,6,4,4"
                                          HorizontalAlignment="Right" VerticalAlignment="Center"
                                          Grid.Column="1" Grid.Row="1" Width="260" Height="32"
                                          FontSize="30" Padding="0,-6,0,0"
