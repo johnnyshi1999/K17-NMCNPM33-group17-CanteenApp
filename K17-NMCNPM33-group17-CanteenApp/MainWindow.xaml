@@ -319,7 +319,7 @@
                                 <StackPanel Orientation="Horizontal"
                                             Canvas.Left="15" Canvas.Top="120" Width="Auto">
                                     <StackPanel Orientation="Horizontal" Margin="0,0,20,0" >
-                                        <CheckBox x:Name="chkBoxCourse">
+                                        <CheckBox x:Name="chkBoxCourse" IsChecked="True">
                                             <CheckBox.LayoutTransform>
                                                 <ScaleTransform ScaleX="2" ScaleY="2" />
                                             </CheckBox.LayoutTransform>
@@ -328,7 +328,7 @@
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal" Margin="0,0,20,0" >
-                                        <CheckBox x:Name="chkBoxDrink">
+                                        <CheckBox x:Name="chkBoxDrink" IsChecked="True">
                                             <CheckBox.LayoutTransform>
                                                 <ScaleTransform ScaleX="2" ScaleY="2" />
                                             </CheckBox.LayoutTransform>
@@ -337,7 +337,7 @@
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal">
-                                        <CheckBox x:Name="chkBoxSnack">
+                                        <CheckBox x:Name="chkBoxSnack" IsChecked="True">
                                             <CheckBox.LayoutTransform>
                                                 <ScaleTransform ScaleX="2" ScaleY="2" />
                                             </CheckBox.LayoutTransform>

@@ -31,10 +31,14 @@ namespace K17_NMCNPM33_group17_CanteenApp
         Order currentOrder;
 		DateTime currentDate { get; set; }
 		int currentNumber { get; set; }
+
+        bool[] searchTypeTicked;
 		
 		public MainWindow()
         {
             InitializeComponent();
+
+            searchTypeTicked = new bool[3];
 
             db = DatabaseHandler.getInstance();
 
@@ -91,6 +95,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
             QuantityBinding.Source = currentOrder;
             // Bind the new data source to the myText TextBlock control's Text dependency property.
             //QuantityTextBlock.SetBinding(TextBlock.TextProperty, QuantityBinding);
+        
 
 			setSearchProductList(dt);
 
@@ -578,16 +583,24 @@ namespace K17_NMCNPM33_group17_CanteenApp
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 string src = dt.Rows[i][1].ToString();
-                if (Regex.IsMatch(src, pattern, options))
+                src = src.Replace("\r\n", "");
+                int tmp = Product.typeStringToInt(dt.Rows[i][2].ToString());
+                if (searchTypeTicked[tmp - 1])
                 {
-                    Product product = new Product()
+                    if (Regex.IsMatch(src, pattern, options)
+                        ||
+                        Regex.IsMatch(pattern, src, options))
                     {
-                        ProductID = dt.Rows[i][0].ToString(),
-                        ProductName = dt.Rows[i][1].ToString(),
-                        type = Product.typeStringToInt(dt.Rows[i][2].ToString()),
-                        price = int.Parse(dt.Rows[i][3].ToString()),
-                    };
-                    productList.Add(product);
+                        Product product = new Product()
+                        {
+                            ProductID = dt.Rows[i][0].ToString(),
+                            ProductName = dt.Rows[i][1].ToString(),
+                            type = tmp,
+                            price = int.Parse(dt.Rows[i][3].ToString()),
+                        };
+
+                        productList.Add(product);
+                    }
                 }
             }
 
@@ -596,6 +609,10 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
+            searchTypeTicked[0] = (bool)chkBoxCourse.IsChecked;
+            searchTypeTicked[1] = (bool)chkBoxDrink.IsChecked;
+            searchTypeTicked[2] = (bool)chkBoxSnack.IsChecked;
+
             db = DatabaseHandler.getInstance();
 
             db.connection.Open();
@@ -621,7 +638,6 @@ namespace K17_NMCNPM33_group17_CanteenApp
             {
                 SearchButton_Click(null, null);
             }
-
         }
 
         private void SearchStatisticButton_Click(object sender, RoutedEventArgs e)
@@ -649,7 +665,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
         {
             RegexOptions options = RegexOptions.Multiline | RegexOptions.IgnoreCase;
             //string pattern = txtBoxInputSearch.Text;
-
+            string pattern = null;
            
 
             for (int i = 0; i < dts.Rows.Count; i++)
