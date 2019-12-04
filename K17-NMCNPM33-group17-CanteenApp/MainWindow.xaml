@@ -484,12 +484,12 @@
                             <Border Background="#F3F3F3" Width="1235" Height="756" Canvas.Left="-30" 
                        BorderBrush="Black" BorderThickness="2" CornerRadius="30" Canvas.Top="-54">
                                 <Canvas>
-                                    <TextBlock Text="Ngày" Style="{DynamicResource MediumText}" Canvas.Left="583" Canvas.Top="57" RenderTransformOrigin="1.031,-0.547"></TextBlock>
-                                    
-                                    <TextBox Name="statisticDate" Text="{Binding Path=DateTimeValue, StringFormat=dd-MM-yyyy}" Height="52" Width="411" Canvas.Left="679" Canvas.Top="39" />
+                                    <TextBlock Text="Ngày" Style="{DynamicResource MediumText}" Canvas.Left="403" Canvas.Top="64" RenderTransformOrigin="1.031,-0.547"></TextBlock>
+
+                                    <TextBox FontSize="32" Name="statisticDate" Text="{Binding Path=DateTimeValue, StringFormat=dd-MM-yyyy}" Height="52" Width="411" Canvas.Left="519" Canvas.Top="38" />
                                     <Button x:Name="SearchStatisticButton" Style="{DynamicResource BlueFormatButton}"
                                         Width="62" Height="60" RenderTransformOrigin="6.126,1.348"
-                                        Canvas.Left="1127" Canvas.Top="30" Click="SearchStatisticButton_Click">
+                                        Canvas.Left="954" Canvas.Top="30" Click="SearchStatisticButton_Click">
                                         <StackPanel Orientation="Horizontal">
                                             <Image Source="Images/search-product.png" Margin="5"
                                                RenderOptions.BitmapScalingMode="Fant"/>
@@ -550,25 +550,28 @@
                                            />
                                         </Border>
                                     </Grid>
-                                    <Grid x:Name="statisticList" Width="1200" ShowGridLines="True"
-                                      Canvas.Left="20" Canvas.Top="206" Height="329" VerticalAlignment="Center">
+                                    <ScrollViewer
+                                    Height="300" Width="1200" Canvas.Left="20" Canvas.Top="206">
+                                        <Grid x:Name="statisticList" Width="1200" ShowGridLines="True"
+                                        Height="300" VerticalAlignment="Center">
 
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="2*" />
-                                            <ColumnDefinition Width="2*" />
-                                            <ColumnDefinition Width="3*" />
-                                            <ColumnDefinition Width="3*" />
-                                        </Grid.ColumnDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="2*" />
+                                                <ColumnDefinition Width="2*" />
+                                                <ColumnDefinition Width="3*" />
+                                                <ColumnDefinition Width="3*" />
+                                            </Grid.ColumnDefinitions>
 
 
 
-                                    </Grid>
+                                        </Grid>
+                                    </ScrollViewer>
                                     <Grid Name="StatisticsSumaray" Width="600"
                                         Height="120" Canvas.Left="44" Canvas.Top="540">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="73*" />
-                                            <ColumnDefinition Width="47*"/>
-                                            <ColumnDefinition Width="180*" />
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="2*"/>
+
 
                                         </Grid.ColumnDefinitions>
 
@@ -580,27 +583,21 @@
 
                                         <TextBlock Style="{DynamicResource LargeText}"
                                        HorizontalAlignment="Center" VerticalAlignment="Center" Text="Tổng doanh thu"
-                                   Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="7,10,6,10"/>
+                                   Grid.Column="0" Grid.Row="0" Margin="37,10,36,10"/>
 
                                         <TextBlock Style="{DynamicResource LargeText}" 
                                        HorizontalAlignment="Center" VerticalAlignment="Center" Text="Số giao dịch"
-                                   Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="34,10,33,10"/>
+                                   Grid.Column="0" Grid.Row="1" Margin="38,10,89,10"/>
 
+                                        <TextBlock x:Name="totalSumStatistic" Style="{DynamicResource LargeText}"
+                                           Text="120000" Margin="0,0,6,0"
+                                           HorizontalAlignment="Right" VerticalAlignment="Center"
+                                           Grid.Column="1" Grid.Row="0" />
+                                        <TextBlock x:Name="totalAmountStatistic" Style="{DynamicResource LargeText}"
+                                           Text="1" Margin="0,0,6,0"
+                                           HorizontalAlignment="Right" VerticalAlignment="Center"
+                                           Grid.Column="1" Grid.Row="1" />
                                     </Grid>
-                                    <Button Name="ForwardButton" Style="{DynamicResource BlueFormatButton}"
-                            Width="62" Height="62" Canvas.Left="1102" Canvas.Top="558">
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image Source="Images/redo-order.png" Margin="5"
-                                   RenderOptions.BitmapScalingMode="Fant"/>
-                                        </StackPanel>
-                                    </Button>
-                                    <Button Name="BackButton" Style="{DynamicResource BlueFormatButton}"
-                            Width="62" Height="62" Canvas.Left="986" Canvas.Top="558">
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image Source="Images/undo-order.png" Margin="5"
-                                   RenderOptions.BitmapScalingMode="Fant"/>
-                                        </StackPanel>
-                                    </Button>
 
                                 </Canvas>
                             </Border>
