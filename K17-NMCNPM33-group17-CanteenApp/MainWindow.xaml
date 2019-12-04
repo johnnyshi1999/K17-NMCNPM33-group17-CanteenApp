@@ -194,20 +194,24 @@
                                     <Border BorderBrush="Black" BorderThickness="0,0,0,1" Grid.Column="4" />
                                 </Grid>
 
-                                <Grid x:Name="OrderList" Width="698" ShowGridLines="True"
-                                      Canvas.Left="0" Canvas.Top="36" Height="606" VerticalAlignment="Center">
+                                <ScrollViewer Width="698" Height="606" Canvas.Left="0" Canvas.Top="36">
+                                    <Grid x:Name="OrderList" Width="698" ShowGridLines="True"
+                                       VerticalAlignment="Top">
 
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="4*" />
-                                        <ColumnDefinition Width="2*" />
-                                        <ColumnDefinition Width="2*" />
-                                        <ColumnDefinition Width="3*" />
-                                        <ColumnDefinition Width="2*" />
-                                    </Grid.ColumnDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="4*" />
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="3*" />
+                                            <ColumnDefinition Width="2*" />
+                                        </Grid.ColumnDefinitions>
 
 
 
-                                </Grid>
+                                    </Grid>
+                                </ScrollViewer>
+
+                                
                                 <Border Background="White" BorderThickness="0,0,0,2"
                                         BorderBrush="Black"
                                         CornerRadius="10" Canvas.Top="654"
@@ -553,7 +557,7 @@
                                     <ScrollViewer
                                     Height="300" Width="1200" Canvas.Left="20" Canvas.Top="206">
                                         <Grid x:Name="statisticList" Width="1200" ShowGridLines="True"
-                                        Height="300" VerticalAlignment="Center">
+                                        Height="Auto" VerticalAlignment="Center">
 
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="2*" />
