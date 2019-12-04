@@ -682,53 +682,56 @@ namespace K17_NMCNPM33_group17_CanteenApp
         {
             RegexOptions options = RegexOptions.Multiline | RegexOptions.IgnoreCase;
             string pattern = statisticDate.Text;
-           
-           
 
+
+            int sum = 0;
             for (int i = 0; i < dts.Rows.Count; i++)
             {
-                DateTime time = (DateTime)dts.Rows[i][1];
-                string src = time.ToString("dd-MM-yyyy"); ;
+                
+                DateTime time = (DateTime)dts.Rows[i][2];
+                string src = time.ToString("dd-MM-yyyy");
+                int f = int.Parse(dts.Rows[i][4].ToString());
                 if (Regex.IsMatch(src, pattern, options))
                 {
+                    sum += int.Parse(dts.Rows[i][4].ToString());
                     Order order = new Order()
                     {
                         OrderID = dts.Rows[i][0].ToString(),
-                        TimeCreated = (DateTime)dts.Rows[i][1],
-                        Employee = dts.Rows[i][2].ToString(),
-                        OrderSum = int.Parse(dts.Rows[i][3].ToString()),
+                        TimeCreated = (DateTime)dts.Rows[i][2],
+                        Employee = dts.Rows[i][3].ToString(),
+                        OrderSum = int.Parse(dts.Rows[i][4].ToString()),
+                       
                     };
                     StatisticList.Add(order);
                 }
             }
-
+            totalSumStatistic.Text = sum.ToString();
+          
             loadStatisticListIntoGrid();
         }
         private void loadStatisticListIntoGrid()
         {
 
-            ProductListGrid.Children.Clear();
-            ProductListGrid.RowDefinitions.Clear();
-
+            statisticList.Children.Clear();
+            statisticList.RowDefinitions.Clear();
+            totalAmountStatistic.Text = StatisticList.Count.ToString();
             for (int i = 0; i < StatisticList.Count; i++)
             {
                 TextBlock orderID = new TextBlock();
                 orderID.Text = StatisticList[i].OrderID.ToString();
                 orderID.Style = Resources["SmallText"] as Style;
 
-                ProductListGrid.Children.Add(orderID);
+                statisticList.Children.Add(orderID);
 
                 Grid.SetRow(orderID, i);
                 Grid.SetColumn(orderID, 0);
 
                 TextBlock employee = new TextBlock();
                 employee.Text = StatisticList[i].Employee;
-                employee.HorizontalAlignment = HorizontalAlignment.Right;
-                employee.Margin = new Thickness(0, 0, 10, 0);
                 employee.Style = Resources["SmallText"] as Style;
-                employee.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2413E3"));
+               
 
-                ProductListGrid.Children.Add(employee);
+                statisticList.Children.Add(employee);
 
                 Grid.SetRow(employee, i);
                 Grid.SetColumn(employee, 1);
@@ -737,7 +740,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 oderSum.Text = StatisticList[i].OrderSum.ToString();
                 oderSum.Style = Resources["SmallText"] as Style;
 
-                ProductListGrid.Children.Add(oderSum);
+                statisticList.Children.Add(oderSum);
 
                 Grid.SetRow(oderSum, i);
                 Grid.SetColumn(oderSum, 2);
@@ -746,10 +749,11 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 timeCreated.Text = StatisticList[i].TimeCreated.ToString("dd MMMM yyyy hh:mm:ss tt");
                 timeCreated.Style = Resources["SmallText"] as Style;
 
-                ProductListGrid.Children.Add(timeCreated);
+                statisticList.Children.Add(timeCreated);
 
                 Grid.SetRow(timeCreated, i);
                 Grid.SetColumn(timeCreated, 3);
+                statisticList.RowDefinitions.Add(new RowDefinition());
 
             }
         }
