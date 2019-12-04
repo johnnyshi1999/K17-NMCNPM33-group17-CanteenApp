@@ -1,11 +1,13 @@
 CREATE DATABASE QLBH
+GO
 
 CREATE TABLE NHAN_VIEN(
     MaNV CHAR(4) PRIMARY KEY,
     TenNV NVARCHAR(100),
     ChucVu NVARCHAR(100),
     TimeCreated DATETIME,
-    TimeUpdated DATETIME
+    TimeUpdated DATETIME,
+	PassWordNV NVARCHAR(50)
 );
 GO
 
@@ -16,8 +18,7 @@ CREATE TABLE DON_HANG(
     NvNhap CHAR(4) FOREIGN KEY REFERENCES NHAN_VIEN(MaNV),
     TongTien INT,
     TienNhan INT,
-    TienThoi INT,
-    TimeCreated DATETIME
+    TienThoi INT
 );
 GO
 
