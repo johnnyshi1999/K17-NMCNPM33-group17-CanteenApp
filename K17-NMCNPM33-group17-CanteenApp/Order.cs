@@ -42,22 +42,20 @@ namespace K17_NMCNPM33_group17_CanteenApp
         {
             get
             {
-                if (ordersum == 0)
+                int result = 0;
+                for (int i = 0; i < detail.Count; i++)
                 {
-                    for (int i = 0; i < detail.Count; i++)
-                    {
-                        ordersum += detail[i].quantity * detail[i].product.price;
-                    }
+                    result += detail[i].quantity * detail[i].product.price;
                 }
-                return ordersum;
+                return result;
             }
             set
             {
-                ordersum = value;
+
             }
-           
+
         }
-        
+
 
 
         public event PropertyChangedEventHandler PropertyChanged;

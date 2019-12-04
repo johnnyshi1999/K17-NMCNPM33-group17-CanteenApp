@@ -135,6 +135,9 @@ namespace K17_NMCNPM33_group17_CanteenApp
             }
 			currentOrder.detail.Add(detail);
             SetOrderList();
+            currentOrder.Notify("Change");
+            currentOrder.Notify("OrderSum");
+            currentOrder.Notify("Quantity");
         }
 
         void SetOrderList()
@@ -199,6 +202,8 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 };
                 DeleteButton.Background = null;
                 DeleteButton.BorderThickness = new Thickness(0, 0, 0, 0);
+                DeleteButton.Width = 35;
+                DeleteButton.Height = 35;
                 DeleteButton.Tag = i;
                 DeleteButton.Click += DeleteProduct_Click;
                 DeleteButton.Margin = new Thickness(10, 0, 0, 0);
@@ -396,6 +401,8 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 };
                 AddButton.Background = null;
                 AddButton.BorderThickness = new Thickness(0, 0, 0, 0);
+                AddButton.Height = 65;
+                AddButton.Width = 65;
                 AddButton.Tag = i;
                 AddButton.Click += AddProduct_Click;
 

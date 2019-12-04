@@ -77,7 +77,7 @@ AS
 	ELSE
 	BEGIN
 	INSERT INTO NHAN_VIEN
-	VALUES (@MaNV, @TenNV, @ChucVu, @TimeCreated, @TimeUpdated)
+	VALUES (@MaNV, @TenNV, @ChucVu, @TimeCreated, @TimeUpdated, @MaNV)
 	END
 GO
 --7. Thêm loại sản phẩm
@@ -151,7 +151,7 @@ AS
 	DECLARE @TienThoi INT
 	SET @TienThoi = @TienNhan - @TongTien
 	INSERT INTO DON_HANG
-	VALUES ( @MaDH , @STT, @ThoiGianNhap , @NvNhap, @TongTien , @TienNhan, @TienThoi, @TimeCreated)
+	VALUES ( @MaDH , @STT, @ThoiGianNhap , @NvNhap, @TongTien , @TienNhan, @TienThoi)
 	END
 GO
 --10.Thêm chi tiết đơn hàng
