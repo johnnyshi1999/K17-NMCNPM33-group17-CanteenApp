@@ -12,7 +12,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
         public string ProductName { get; set; }
         public int price { get; set; }
         public int type { get; set; }
-
+        public string AvatarLink;
         public static int typeStringToInt(string sType)
         {
             if (sType == "Món ăn\r\n")
