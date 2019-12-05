@@ -46,13 +46,9 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 int result = 0;
                 for (int i = 0; i < detail.Count; i++)
                 {
-                    OrderSum += detail[i].quantity * detail[i].product.price;
+                    result += detail[i].quantity * detail[i].product.price;
                 }
                 return result;
-            }
-            set
-            {
-                OrderSum = value;
             }
             
         }
