@@ -83,7 +83,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
             //DataListView.SetBinding(ItemsControl.ItemsSourceProperty, new Binding { Source = dt });
 
             productList = new List<Product>();
-             StatisticList = new List<Order>();
+            StatisticList = new List<Order>();
             currentOrder = new Order();
             
             SqlCommand cmd = new SqlCommand("SP_DanhSachSP", db.connection);
@@ -700,7 +700,8 @@ namespace K17_NMCNPM33_group17_CanteenApp
             RegexOptions options = RegexOptions.Multiline | RegexOptions.IgnoreCase;
             string pattern = statisticDate.Text;
 
-
+            List<int> orderSumList = new List<int>();
+                
             int sum = 0;
             for (int i = 0; i < dts.Rows.Count; i++)
             {
@@ -708,15 +709,17 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 DateTime time = (DateTime)dts.Rows[i][2];
                 string src = time.ToString("dd-MM-yyyy");
                 int f = int.Parse(dts.Rows[i][4].ToString());
+
                 if (Regex.IsMatch(src, pattern, options))
                 {
                     sum += int.Parse(dts.Rows[i][4].ToString());
+                    orderSumList.Add(int.Parse(dts.Rows[i][4].ToString()));
                     Order order = new Order()
                     {
                         OrderID = dts.Rows[i][0].ToString(),
                         TimeCreated = (DateTime)dts.Rows[i][2],
                         Employee = dts.Rows[i][3].ToString(),
-                        orderSum = int.Parse(dts.Rows[i][4].ToString()),
+                        //orderSum = int.Parse(dts.Rows[i][4].ToString()),
                        
                     };
                     StatisticList.Add(order);
@@ -724,9 +727,9 @@ namespace K17_NMCNPM33_group17_CanteenApp
             }
             totalSumStatistic.Text = sum.ToString();
           
-            loadStatisticListIntoGrid();
+            loadStatisticListIntoGrid(orderSumList);
         }
-        private void loadStatisticListIntoGrid()
+        private void loadStatisticListIntoGrid(List<int> orderSumList)
         {
 
             statisticList.Children.Clear();
@@ -754,8 +757,8 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 Grid.SetColumn(employee, 1);
 
                 TextBlock oderSum = new TextBlock();
-                oderSum.Text = StatisticList[i].OrderSum.ToString();
-                Debug.WriteLine(StatisticList[i].OrderSum);
+                oderSum.Text = orderSumList[i].ToString();
+           
                 oderSum.Style = Resources["SmallText"] as Style;
 
                 statisticList.Children.Add(oderSum);

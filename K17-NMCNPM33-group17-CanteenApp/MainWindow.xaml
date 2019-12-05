@@ -570,7 +570,7 @@
 
                                         </Grid>
                                     </ScrollViewer>
-                                    <Grid Name="StatisticsSumaray" Width="600"
+                                    <Grid Name="StatisticsSumary" Width="600"
                                         Height="120" Canvas.Left="44" Canvas.Top="540">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="2*" />
