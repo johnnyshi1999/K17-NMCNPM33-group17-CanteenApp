@@ -383,10 +383,10 @@
                                 </ListView>-->
 
                                 <ScrollViewer
-                                    Height="Auto" Width="558" Canvas.Left="8" Canvas.Top="171">
-                                    <Grid Name="ProductListGrid" Height="Auto" Width="558"
-                                          ShowGridLines="True">
+                                    Height="669" Width="558" Canvas.Left="8" Canvas.Top="171">
+                                    <Grid Name="ProductListGrid" Height="Auto" Width="558">
                                         <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"></ColumnDefinition>
                                             <ColumnDefinition Width="2*"></ColumnDefinition>
                                             <ColumnDefinition Width="2*"></ColumnDefinition>
                                             <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -557,7 +557,7 @@
                                     <ScrollViewer
                                     Height="300" Width="1200" Canvas.Left="20" Canvas.Top="206">
                                         <Grid x:Name="statisticList" Width="1200" ShowGridLines="True"
-                                        Height="Auto" VerticalAlignment="Center">
+                                        Height="Auto" VerticalAlignment="Top">
 
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="2*" />

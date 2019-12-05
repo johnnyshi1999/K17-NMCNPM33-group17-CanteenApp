@@ -304,6 +304,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
                     ProductName = dt.Rows[i][1].ToString(),
                     type = Product.typeStringToInt(dt.Rows[i][2].ToString()),
                     price = int.Parse(dt.Rows[i][3].ToString()),
+                    AvatarLink = dt.Rows[i][4].ToString(),
                 };
                 productList.Add(product);
             }
@@ -369,14 +370,23 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
             for (int i = 0; i < productList.Count; i++)
             {
+                Image avatar = new Image();
+                avatar.Source = new BitmapImage(new Uri($"{AppDomain.CurrentDomain.BaseDirectory}{productList[i].AvatarLink}"));
+
+                ProductListGrid.Children.Add(avatar);
+
+                Grid.SetRow(avatar, i);
+                Grid.SetColumn(avatar, 0);
+
                 TextBlock productName = new TextBlock();
                 productName.Text = productList[i].ProductName;
                 productName.Style = Resources["SmallText"] as Style;
+                productName.Margin = new Thickness(10, 0, 0, 0);
 
                 ProductListGrid.Children.Add(productName);
 
                 Grid.SetRow(productName, i);
-                Grid.SetColumn(productName, 0);
+                Grid.SetColumn(productName, 1);
 
                 TextBlock productPrice = new TextBlock();
                 productPrice.Text = productList[i].price.ToString();
@@ -388,7 +398,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 ProductListGrid.Children.Add(productPrice);
 
                 Grid.SetRow(productPrice, i);
-                Grid.SetColumn(productPrice, 1);
+                Grid.SetColumn(productPrice, 2);
 
                 Button AddButton = new Button()
                 {
@@ -409,7 +419,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 ProductListGrid.Children.Add(AddButton);
 
                 Grid.SetRow(AddButton, i);
-                Grid.SetColumn(AddButton, 2);
+                Grid.SetColumn(AddButton, 3);
 
                 ProductListGrid.RowDefinitions.Add(new RowDefinition());
 
@@ -706,7 +716,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
                         OrderID = dts.Rows[i][0].ToString(),
                         TimeCreated = (DateTime)dts.Rows[i][2],
                         Employee = dts.Rows[i][3].ToString(),
-                        OrderSum = int.Parse(dts.Rows[i][4].ToString()),
+                        orderSum = int.Parse(dts.Rows[i][4].ToString()),
                        
                     };
                     StatisticList.Add(order);
@@ -745,6 +755,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
                 TextBlock oderSum = new TextBlock();
                 oderSum.Text = StatisticList[i].OrderSum.ToString();
+                Debug.WriteLine(StatisticList[i].OrderSum);
                 oderSum.Style = Resources["SmallText"] as Style;
 
                 statisticList.Children.Add(oderSum);

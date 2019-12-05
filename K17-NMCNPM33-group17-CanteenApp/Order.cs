@@ -21,7 +21,8 @@ namespace K17_NMCNPM33_group17_CanteenApp
         public string OrderID;
         public int number;
         public string Employee;
-        private int ordersum = 0;
+
+        public int orderSum = 0;
         public DateTime TimeCreated;
         public List<OrderDetail> detail;
 
@@ -45,15 +46,15 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 int result = 0;
                 for (int i = 0; i < detail.Count; i++)
                 {
-                    result += detail[i].quantity * detail[i].product.price;
+                    OrderSum += detail[i].quantity * detail[i].product.price;
                 }
                 return result;
             }
             set
             {
-
+                OrderSum = value;
             }
-
+            
         }
 
 
