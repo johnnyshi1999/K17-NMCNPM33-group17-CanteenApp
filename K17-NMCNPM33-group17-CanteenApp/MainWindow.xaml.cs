@@ -498,7 +498,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
             cmd.Parameters.AddWithValue("@MaDH", SqlDbType.Char).Value = ID;
             cmd.Parameters.AddWithValue("@STT", SqlDbType.Int).Value = currentOrder.number;
             cmd.Parameters.AddWithValue("@ThoiGianNhap", SqlDbType.DateTime).Value = currentOrder.TimeCreated;
-            cmd.Parameters.AddWithValue("@NvNhap", SqlDbType.Char).Value = "SL01";
+            cmd.Parameters.AddWithValue("@NvNhap", SqlDbType.Char).Value = currentAccount.AccountID;
             cmd.Parameters.AddWithValue("@TongTien", SqlDbType.Int).Value = currentOrder.OrderSum;
             cmd.Parameters.AddWithValue("@TienNhan", SqlDbType.Int).Value = currentOrder.Receive;
             cmd.Parameters.AddWithValue("@TimeCreated", SqlDbType.DateTime).Value = currentOrder.TimeCreated;

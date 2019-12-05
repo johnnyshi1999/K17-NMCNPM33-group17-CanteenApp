@@ -74,7 +74,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 return;
             }
 
-            if (Password != UserName)
+            if (Password != dt.Rows[0][5].ToString())
             {
                 wrongPass.Text = "Wrong password";
                 return;
