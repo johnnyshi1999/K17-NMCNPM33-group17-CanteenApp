@@ -22,7 +22,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
     public partial class Login : Window
     {
         public Account account;
-
+        BrushConverter bc;
         DatabaseHandler db;
 
         private static string LOGIN_FAILED = "Something is wrong";
@@ -30,6 +30,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
         public Login()
         {
             InitializeComponent();
+            bc = new BrushConverter();
             db = DatabaseHandler.getInstance();
 
             db.connection.Open();
@@ -40,12 +41,14 @@ namespace K17_NMCNPM33_group17_CanteenApp
         {
             wrongUserName.Text = "";
             wrongPass.Text = "";
+            belowBorder.Background = (Brush) bc.ConvertFrom("#183557");
         }
 
         private void Password_PasswordChanged(object sender, RoutedEventArgs e)
         {
             wrongUserName.Text = "";
             wrongPass.Text = "";
+            belowBorder.Background = (Brush)bc.ConvertFrom("#183557");
         }
 
         private void SignIn_Click(object sender, RoutedEventArgs e)
@@ -53,12 +56,18 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
             if (String.IsNullOrEmpty(userName.Text))
             {
+                //wrongUserName.Background = Brushes.White;
+                belowBorder.Background = Brushes.White;
                 wrongUserName.Text = LOGIN_FAILED;
+                
                 return;
             }
             if (String.IsNullOrEmpty(password.Password))
             {
+                //wrongPass.Background = Brushes.White;
+                belowBorder.Background = Brushes.White;
                 wrongPass.Text = LOGIN_FAILED;
+                
                 return;
             }
 
@@ -77,12 +86,14 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
             if (dt.Rows.Count == 0)
             {
-                wrongUserName.Text = "Wrong user name";
+                belowBorder.Background = Brushes.White;
+                wrongUserName.Text = "Wrong username";
                 return;
             }
 
             if (Password != dt.Rows[0][5].ToString())
             {
+                belowBorder.Background = Brushes.White;
                 wrongPass.Text = "Wrong password";
                 return;
             }

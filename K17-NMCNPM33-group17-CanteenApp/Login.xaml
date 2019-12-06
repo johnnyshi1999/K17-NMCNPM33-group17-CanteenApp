@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:K17_NMCNPM33_group17_CanteenApp"
         mc:Ignorable="d"
-        Title="Login" Height="370" Width="360"
+        Title="Login" Height="350" Width="360"
         Closing="Login_Closing">
     <Window.Resources>
         <Style x:Key="RedFormatButton" TargetType="{x:Type Button}">
@@ -47,55 +47,60 @@
         </Style>
     </Window.Resources>
 
-    <StackPanel Orientation="Vertical">
 
-        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap"
+    <StackPanel Orientation="Vertical" Background="#183557">
+        <!--<Border Margin="0,2,0,0" Width="Auto" Height="38"
+                Background="#FFDF0C0C"/>-->
+        <Border Margin="45,20,45,0" Background="#FFDF0C0C">
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap"
                    VerticalAlignment="Top" Height="Auto" Width="Auto" FontSize="24"
-                   Margin="20,20,20,0" Foreground="Black"
-                   FontStyle="Italic"
+                    Foreground="White"
+                   FontStyle="Italic" FontWeight="DemiBold"
                    FontFamily="Tahoma" TextAlignment="Center"
-                   Text="Username"/>
-
+                   Text="Username" Margin="0,5,0,5" />
+        </Border>
         <TextBox x:Name="userName" HorizontalAlignment="Center" Height="40"
                  TextWrapping="Wrap" VerticalAlignment="Top"
-                 Margin="20,20,20,0"
+                 Margin="20,0"
                  Width="256" TextChanged="TextBox_TextChanged" FontSize="24"
                  FontFamily="Arial" Background="White"
                  />
-
-        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap"
+        <Border Margin="45,20,45,0" Background="#FFDF0C0C">
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap"
                    VerticalAlignment="Top" Height="Auto" Width="Auto"
-                   Margin="20,20,20,0" Foreground="Black"
-                   FontStyle="Italic"
+                   Foreground="White" Padding="0,5"
+                   FontStyle="Italic" FontWeight="DemiBold"
                    FontSize="24" FontFamily="Tahoma" Text="Password"
                    TextAlignment="Center"
-                   >
-        </TextBlock>
+                   />
+        </Border>
         <PasswordBox x:Name="password" Height="40" Width="256"
-                     Margin="20,20,20,0"
+                     Margin="20,0"
                      FontSize="25" TextOptions.TextHintingMode="Fixed" PasswordChanged="Password_PasswordChanged"
                      
                      />
         <Button x:Name="signIn" Content="Sign in"
-                Style="{DynamicResource BlueFormatButton}"
-                Margin="20,20,20,0" Width="120" Height="40"
-                Click="SignIn_Click"
-                FontSize="24" FontFamily="Tahoma" Background="White"
-                IsDefault="True"/>
-        <Canvas>
-            <TextBlock x:Name="wrongUserName" HorizontalAlignment="Center" 
-                       TextAlignment="Center" Foreground="Red"
-                       TextWrapping="Wrap" VerticalAlignment="Top"
-                       Height="Auto" Width="256" FontSize="18"
-                       Canvas.Left="50" Canvas.Top="12" Padding="0,0,0,2"
-                       FontWeight="Bold" />
-            <TextBlock x:Name="wrongPass" HorizontalAlignment="Center"
-                       TextAlignment="Center" Foreground="Red"
-                       TextWrapping="Wrap" VerticalAlignment="Top"
-                       Height="Auto" Width="256" FontSize="18"
-                       Canvas.Left="50" Canvas.Top="12" Padding="0,0,0,2"
-                       FontWeight="Bold"/>
-        </Canvas>
+                Style="{DynamicResource RedFormatButton}"
+                Margin="20,20,20,10" Width="120" Height="40"
+                Click="SignIn_Click" FontWeight="DemiBold"
+                FontSize="24" FontFamily="Tahoma"
+                IsDefault="True" Padding="0"/>
 
+        <Border x:Name="belowBorder" Margin="0,5" Width="Auto" Height="38">
+            <Canvas>
+                <TextBlock x:Name="wrongUserName" HorizontalAlignment="Center" 
+                       TextAlignment="Center" Foreground="Red"
+                       TextWrapping="Wrap" VerticalAlignment="Top"
+                       Height="Auto" Width="256" FontSize="18"
+                       Canvas.Left="50" Canvas.Top="6" Padding="0,0,0,2"
+                       FontWeight="Bold" />
+                <TextBlock x:Name="wrongPass" HorizontalAlignment="Center"
+                       TextAlignment="Center" Foreground="Red"
+                       TextWrapping="Wrap" VerticalAlignment="Top"
+                       Height="Auto" Width="256" FontSize="18"
+                       Canvas.Left="50" Canvas.Top="6" Padding="0,0,0,2"
+                       FontWeight="Bold"/>
+            </Canvas>
+        </Border>
     </StackPanel>
 </Window>
