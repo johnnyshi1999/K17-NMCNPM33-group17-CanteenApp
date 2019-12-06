@@ -51,7 +51,7 @@
     <StackPanel Orientation="Vertical" Background="#183557">
         <!--<Border Margin="0,2,0,0" Width="Auto" Height="38"
                 Background="#FFDF0C0C"/>-->
-        <Border Margin="45,20,45,0" Background="#FFDF0C0C">
+        <Border Margin="45,20,45,0" Background="#FFDF0C0C" CornerRadius="10,10,0,0">
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap"
                    VerticalAlignment="Top" Height="Auto" Width="Auto" FontSize="24"
                     Foreground="White"
@@ -59,13 +59,16 @@
                    FontFamily="Tahoma" TextAlignment="Center"
                    Text="Username" Margin="0,5,0,5" />
         </Border>
+        <Border Width="256" Background="White" CornerRadius="0,0,10,10">
         <TextBox x:Name="userName" HorizontalAlignment="Center" Height="40"
                  TextWrapping="Wrap" VerticalAlignment="Top"
-                 Margin="20,0"
-                 Width="256" TextChanged="TextBox_TextChanged" FontSize="24"
+                 
+                 Width="240" TextChanged="TextBox_TextChanged" FontSize="24"
                  FontFamily="Arial" Background="White"
                  />
-        <Border Margin="45,20,45,0" Background="#FFDF0C0C">
+        </Border>
+
+        <Border Margin="45,20,45,0" Background="#FFDF0C0C" CornerRadius="10,10,0,0">
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap"
                    VerticalAlignment="Top" Height="Auto" Width="Auto"
                    Foreground="White" Padding="0,5"
@@ -74,11 +77,12 @@
                    TextAlignment="Center"
                    />
         </Border>
-        <PasswordBox x:Name="password" Height="40" Width="256"
-                     Margin="20,0"
-                     FontSize="25" TextOptions.TextHintingMode="Fixed" PasswordChanged="Password_PasswordChanged"
-                     
+        <Border Width="256" Background="White" CornerRadius="0,0,10,10">
+            <PasswordBox x:Name="password" Height="40" Width="240"
+                         FontSize="25" TextOptions.TextHintingMode="Fixed"
+                         PasswordChanged="Password_PasswordChanged"
                      />
+        </Border>
         <Button x:Name="signIn" Content="Sign in"
                 Style="{DynamicResource RedFormatButton}"
                 Margin="20,20,20,10" Width="120" Height="40"
