@@ -15,11 +15,11 @@ namespace K17_NMCNPM33_group17_CanteenApp
         public string AvatarLink;
         public static int typeStringToInt(string sType)
         {
-            if (sType == "Món ăn\r\n")
+            if (sType == "Món ăn")
                 return 1;
-            if (sType == "Thức uống\r\n")
+            if (sType == "Thức uống")
                 return 2;
-            if (sType == "Snack\r\n")
+            if (sType == "Snack")
                 return 3;
             return 0;
         }

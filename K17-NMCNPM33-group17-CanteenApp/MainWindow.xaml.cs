@@ -632,9 +632,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 int tmp = Product.typeStringToInt(dt.Rows[i][2].ToString());
                 if (searchTypeTicked[tmp - 1])
                 {
-                    if (Regex.IsMatch(src, pattern, options)
-                        ||
-                        Regex.IsMatch(pattern, src, options))
+                    if (Regex.IsMatch(src, pattern, options))
                     {
                         Product product = new Product()
                         {
