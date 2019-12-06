@@ -34,6 +34,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
 		DateTime currentDate { get; set; }
 		int currentNumber { get; set; }
 
+        bool isLoggedIn = false;
         bool[] searchTypeTicked;
 
         public MainWindow()
@@ -43,10 +44,12 @@ namespace K17_NMCNPM33_group17_CanteenApp
             Login login = new Login();
             if (login.ShowDialog() != true)
             {
+                this.Close();
                 return;
             }
             else
             {
+                isLoggedIn = true;
                 currentAccount = login.account;
             }
 
@@ -588,17 +591,25 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            const string filename = "save.txt";
+            if (isLoggedIn)
+            {
+                if (MessageBox.Show(this, "Are you sure you want to exit?", "Exit", MessageBoxButton.YesNo) != MessageBoxResult.Yes)
+                {
+                    e.Cancel = true;
+                    return;
+                }
 
-            var writer = new StreamWriter(filename);
-            // Dong dau tien la luot di hien tai
-            writer.WriteLine(currentNumber);
+                const string filename = "save.txt";
 
-            // Theo sau la ngay hien tai
-            writer.WriteLine(currentDate.ToString());
+                var writer = new StreamWriter(filename);
+                // Dong dau tien la luot di hien tai
+                writer.WriteLine(currentNumber);
 
+                // Theo sau la ngay hien tai
+                writer.WriteLine(currentDate.ToString());
 
-            writer.Close();
+                writer.Close();
+            }
         }
 		
 		private void BtnPay_Click(object sender, RoutedEventArgs e)
@@ -784,9 +795,11 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
+            isLoggedIn = false;
             Login login = new Login();
             if (login.ShowDialog() == true)
             {
+                isLoggedIn = true;
                 currentAccount = login.account;
             }
             else
@@ -794,5 +807,6 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 this.Close();
             }
         }
+
     }
 }

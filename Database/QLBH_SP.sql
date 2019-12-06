@@ -1,6 +1,6 @@
 ﻿use master
 go
-use QuanLyBanHang
+use QLBH
 go
 --Tạo store procedure
 --0. Trả về danh sách sản phẩm

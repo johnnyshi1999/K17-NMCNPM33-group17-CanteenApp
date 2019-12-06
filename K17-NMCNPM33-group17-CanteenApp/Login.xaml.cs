@@ -25,6 +25,8 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
         DatabaseHandler db;
 
+        private static string LOGIN_FAILED = "Something is wrong";
+
         public Login()
         {
             InitializeComponent();
@@ -36,22 +38,27 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (sender == userName)
-                wrongUserName.Text = "";
-            else
-                wrongPass.Text = "";
+            wrongUserName.Text = "";
+            wrongPass.Text = "";
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Password_PasswordChanged(object sender, RoutedEventArgs e)
         {
+            wrongUserName.Text = "";
+            wrongPass.Text = "";
+        }
+
+        private void SignIn_Click(object sender, RoutedEventArgs e)
+        {
+
             if (String.IsNullOrEmpty(userName.Text))
             {
-                wrongUserName.Text = "Something is wrong";
+                wrongUserName.Text = LOGIN_FAILED;
                 return;
             }
             if (String.IsNullOrEmpty(password.Password))
             {
-                wrongPass.Text = "Something is wrong";
+                wrongPass.Text = LOGIN_FAILED;
                 return;
             }
 
@@ -92,5 +99,14 @@ namespace K17_NMCNPM33_group17_CanteenApp
             return;
         }
 
+        private void Login_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (DialogResult == null)
+            if (MessageBox.Show(this, "Are you sure you want to exit?", "Exit", MessageBoxButton.YesNo) != MessageBoxResult.Yes)
+            {
+                e.Cancel = true;
+                return;
+            }
+        }
     }
 }
