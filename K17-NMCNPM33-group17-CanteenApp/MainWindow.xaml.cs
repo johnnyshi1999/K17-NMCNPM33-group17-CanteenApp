@@ -697,10 +697,12 @@ namespace K17_NMCNPM33_group17_CanteenApp
                     {
                         Product product = new Product()
                         {
+                            
                             ProductID = dt.Rows[i][0].ToString(),
                             ProductName = dt.Rows[i][1].ToString(),
                             type = tmp,
                             price = int.Parse(dt.Rows[i][3].ToString()),
+                            AvatarLink = dt.Rows[i][4].ToString(),
                         };
 
                         productList.Add(product);
@@ -722,8 +724,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
             db.connection.Open();
 
             productList = new List<Product>();
-            currentOrder = new Order();
-
+            
             SqlCommand cmd = new SqlCommand("SP_DanhSachSP", db.connection);
             cmd.CommandType = CommandType.StoredProcedure;
             
