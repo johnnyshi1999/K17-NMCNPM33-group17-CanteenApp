@@ -399,7 +399,7 @@
                         </Border>
                         <Button x:Name="btnPrintBill" Style="{DynamicResource RedFormatButton}"
                                 Width="116" Height="120" Canvas.Left="757" Canvas.Top="786"
-                                Click="SaveOrder_Click">
+                                Click="PrintBill_Click">
                             <StackPanel Orientation="Vertical">
                                 <Image Source="Images/printer-order.png"
                                        Width="50" Height="50"
@@ -409,7 +409,7 @@
                         </Button>
                         <Button x:Name="btnPay" Style="{DynamicResource RedFormatButton}"
                                 Width="136" Height="120" Canvas.Left="613" Canvas.Top="786"
-                                Click="BtnPay_Click">
+                                Click="SaveOrder_Click">
                             <StackPanel Orientation="Vertical">
                                 <Image Width="50" Height="50"
                                        RenderOptions.BitmapScalingMode="Fant"

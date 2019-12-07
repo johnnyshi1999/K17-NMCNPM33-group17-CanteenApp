@@ -33,6 +33,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
         Order currentOrder;
 		DateTime currentDate { get; set; }
 		int currentNumber { get; set; }
+        private bool orderSaved;
 
         bool isLoggedIn = false;
         bool[] searchTypeTicked;
@@ -486,12 +487,27 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
         private void SaveOrder_Click(object sender, RoutedEventArgs e)
         {
-            string ID = currentDate.Day.ToString() + currentDate.Month.ToString() + currentNumber.ToString();
 
-            if (currentOrder.OrderID == ID)
+            if (orderSaved == true)
             {
+                MessageBox.Show("Order đã được thanh toán. Xin tạo order mới");
                 return;
             }
+
+            if (currentOrder.detail.Count == 0)
+            {
+                MessageBox.Show("Order trống, không thể thanh toán");
+                return;
+            }
+
+            if (currentOrder.Change < 0)
+            {
+                MessageBox.Show("nhận chưa đủ tiền, không thể thanh toán");
+                return;
+            }
+
+            string ID = currentDate.Day.ToString() + currentDate.Month.ToString() + currentNumber.ToString();
+
             currentOrder.OrderID = ID;
             currentOrder.TimeCreated = currentDate;
 
@@ -519,22 +535,63 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 cmd.Parameters.AddWithValue("@SL", SqlDbType.Int).Value = currentOrder.detail[i].quantity;
                 cmd.ExecuteNonQuery();
             }
-            MessageBox.Show("Sales Order Saved");
+            MessageBox.Show("Order lưu thành công");
             db.connection.Close();
+            orderSaved = true;
         }
 
         private void NewOrder_Click(object sender, RoutedEventArgs e)
         {
+
+            if (orderSaved != true)
+            {
+                MessageBox.Show("Hãy lưu order hiện tại trước tiên");
+                return;
+            }
             currentOrder = new Order();
             SetOrderList();
             currentNumber++;
-           txtBoxCurrentNumber.Text = currentNumber.ToString();
+            txtBoxCurrentNumber.Text = currentNumber.ToString();
+            currentOrder.number = currentNumber;
+            Binding orderSumBinding = new Binding("OrderSum");
+            orderSumBinding.Source = currentOrder;
+            // Bind the new data source to the myText TextBlock control's Text dependency property.
+            totalAmountDue.SetBinding(TextBlock.TextProperty, orderSumBinding);
+
+            Binding ChangeBinding = new Binding("Change");
+            ChangeBinding.Source = currentOrder;
+            // Bind the new data source to the myText TextBlock control's Text dependency property.
+            changeAmount.SetBinding(TextBlock.TextProperty, ChangeBinding);
+
+            Binding QuantityBinding = new Binding("Quantity");
+            QuantityBinding.Source = currentOrder;
+            orderSaved = false;
         }
 
         private void DeleteOrder_Click(object sender, RoutedEventArgs e)
         {
-            currentOrder = new Order();
-            SetOrderList();
+            if (orderSaved != true)
+            {
+                currentOrder = new Order();
+                SetOrderList();
+                Binding orderSumBinding = new Binding("OrderSum");
+                orderSumBinding.Source = currentOrder;
+                // Bind the new data source to the myText TextBlock control's Text dependency property.
+                totalAmountDue.SetBinding(TextBlock.TextProperty, orderSumBinding);
+
+                Binding ChangeBinding = new Binding("Change");
+                ChangeBinding.Source = currentOrder;
+                // Bind the new data source to the myText TextBlock control's Text dependency property.
+                changeAmount.SetBinding(TextBlock.TextProperty, ChangeBinding);
+
+                Binding QuantityBinding = new Binding("Quantity");
+                QuantityBinding.Source = currentOrder;
+            }
+            else
+            {
+                MessageBox.Show("Order đã được lưu, không thể xóa");
+            }
+            
         }
 
         private void ChangeNumber_Click(object sender, RoutedEventArgs e)
@@ -593,7 +650,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
         {
             if (isLoggedIn)
             {
-                if (MessageBox.Show(this, "Are you sure you want to exit?", "Exit", MessageBoxButton.YesNo) != MessageBoxResult.Yes)
+                if (MessageBox.Show(this, "Bạn có thực sự muốn thoát chương trình", "Exit", MessageBoxButton.YesNo) != MessageBoxResult.Yes)
                 {
                     e.Cancel = true;
                     return;
@@ -603,8 +660,12 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
                 var writer = new StreamWriter(filename);
                 // Dong dau tien la luot di hien tai
-                writer.WriteLine(currentNumber);
 
+                //neu order hien tai da duoc luu, so thu tu se duoc +1 de lan sau mo app so thu tu se khong bi trung
+                if (orderSaved == true)
+                    writer.WriteLine(currentNumber + 1);
+                else
+                    writer.WriteLine(currentNumber);
                 // Theo sau la ngay hien tai
                 writer.WriteLine(currentDate.ToString());
 
@@ -787,8 +848,8 @@ namespace K17_NMCNPM33_group17_CanteenApp
         private void AccountInfo_Click(object sender, RoutedEventArgs e)
         {
 
-            MessageBox.Show($"Account ID: {currentAccount.AccountID}\n" +
-                $"Name: {currentAccount.Name}\n");
+            MessageBox.Show($"Mã nhân viên: {currentAccount.AccountID}\n" +
+                $"Tên: {currentAccount.Name}\n");
         }
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
@@ -806,5 +867,9 @@ namespace K17_NMCNPM33_group17_CanteenApp
             }
         }
 
+        private void PrintBill_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Order đã được in!!!");
+        }
     }
 }
