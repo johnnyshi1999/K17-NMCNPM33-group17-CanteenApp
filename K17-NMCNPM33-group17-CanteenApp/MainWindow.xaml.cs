@@ -112,7 +112,10 @@ namespace K17_NMCNPM33_group17_CanteenApp
             QuantityBinding.Source = currentOrder;
             // Bind the new data source to the myText TextBlock control's Text dependency property.
             //QuantityTextBlock.SetBinding(TextBlock.TextProperty, QuantityBinding);
-        
+
+            /*Binding curNumberBinding = new Binding();
+            curNumberBinding.Source = currentNumber;
+            txtBoxCurrentNumber.SetBinding(TextBlock.TextProperty, curNumberBinding);*/
 
 			setSearchProductList(dt);
 
@@ -502,7 +505,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
             if (currentOrder.Change < 0)
             {
-                MessageBox.Show("nhận chưa đủ tiền, không thể thanh toán");
+                MessageBox.Show("Nhận chưa đủ tiền, không thể thanh toán");
                 return;
             }
 
@@ -638,6 +641,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
             finally
             {
                 txtBoxCurrentNumber.Text = currentNumber.ToString();
+                currentOrder.number = currentNumber;
                 DateTextBlock.Text = currentDate.Day + "/" + currentDate.Month + "/" + currentDate.Year;
                 
             }
@@ -650,7 +654,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
         {
             if (isLoggedIn)
             {
-                if (MessageBox.Show(this, "Bạn có thực sự muốn thoát chương trình", "Exit", MessageBoxButton.YesNo) != MessageBoxResult.Yes)
+                if (MessageBox.Show(this, "Bạn có thực sự muốn thoát chương trình?", "Exit", MessageBoxButton.YesNo) != MessageBoxResult.Yes)
                 {
                     e.Cancel = true;
                     return;
@@ -672,11 +676,6 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 writer.Close();
             }
         }
-		
-		private void BtnPay_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         void setSearchResultProductList(DataTable dt)
         {
@@ -689,7 +688,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 string src = dt.Rows[i][1].ToString();
-                src = src.Replace("\r\n", "");
+                
                 int tmp = Product.typeStringToInt(dt.Rows[i][2].ToString());
                 if (searchTypeTicked[tmp - 1])
                 {
@@ -723,7 +722,6 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
             db.connection.Open();
 
-            productList = new List<Product>();
             
             SqlCommand cmd = new SqlCommand("SP_DanhSachSP", db.connection);
             cmd.CommandType = CommandType.StoredProcedure;
