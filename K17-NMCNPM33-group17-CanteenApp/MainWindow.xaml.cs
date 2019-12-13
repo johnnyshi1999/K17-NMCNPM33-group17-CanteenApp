@@ -685,33 +685,27 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
         void setSearchResultProductList(DataTable dt)
         {
-            RegexOptions options = RegexOptions.Multiline | RegexOptions.IgnoreCase;
-            string pattern = txtBoxInputSearch.Text;
+            //RegexOptions options = RegexOptions.Multiline | RegexOptions.IgnoreCase;
+            //string pattern = txtBoxInputSearch.Text;
 
             if (productList.Count != 0)
                 productList.Clear();
 
             for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                string src = dt.Rows[i][1].ToString();
-                
+            {                
                 int tmp = Product.typeStringToInt(dt.Rows[i][2].ToString());
                 if (searchTypeTicked[tmp - 1])
                 {
-                    if (Regex.IsMatch(src, pattern, options))
+                    Product product = new Product()
                     {
-                        Product product = new Product()
-                        {
-                            
-                            ProductID = dt.Rows[i][0].ToString(),
-                            ProductName = dt.Rows[i][1].ToString(),
-                            type = tmp,
-                            price = int.Parse(dt.Rows[i][3].ToString()),
-                            AvatarLink = dt.Rows[i][4].ToString(),
-                        };
 
-                        productList.Add(product);
-                    }
+                        ProductID = dt.Rows[i][0].ToString(),
+                        ProductName = dt.Rows[i][1].ToString(),
+                        type = tmp,
+                        price = int.Parse(dt.Rows[i][3].ToString()),
+                        AvatarLink = dt.Rows[i][4].ToString(),
+                    };
+                    productList.Add(product);
                 }
             }
 
@@ -720,18 +714,25 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
+            string pattern = txtBoxInputSearch.Text;
             searchTypeTicked[0] = (bool)chkBoxCourse.IsChecked;
             searchTypeTicked[1] = (bool)chkBoxDrink.IsChecked;
             searchTypeTicked[2] = (bool)chkBoxSnack.IsChecked;
-
+            
+            
             db = DatabaseHandler.getInstance();
 
             db.connection.Open();
 
-            
-            SqlCommand cmd = new SqlCommand("SP_DanhSachSP", db.connection);
+            SqlCommand cmd;
+            if (String.IsNullOrEmpty(pattern))
+                cmd = new SqlCommand("SP_DanhSachSP", db.connection);
+            else
+            {
+                cmd = new SqlCommand("SP_TimKiemSP", db.connection);
+                cmd.Parameters.AddWithValue("@str_query", SqlDbType.NVarChar).Value = pattern;
+            }
             cmd.CommandType = CommandType.StoredProcedure;
-            
             SqlDataReader dr = cmd.ExecuteReader();
             DataTable dt = new DataTable();
             dt.Load(dr);
