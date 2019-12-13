@@ -12,8 +12,8 @@ namespace K17_NMCNPM33_group17_CanteenApp
 
         //chuoi connect voi database --- "Data Source": ten may tinh; "Initial Catalog": ten db
 
-        //static string connection_string = @"Data Source=DESKTOP-CR27SAG;Initial Catalog=QLBH;Integrated Security=True";
-        static string connection_string = @"Data Source=LENOVO-YOGA-520;Initial Catalog=QLBH;User ID=sa;Password=123;Integrated Security=True";
+        static string connection_string = @"Data Source=DESKTOP-CR27SAG;Initial Catalog=QLBH;Integrated Security=True";
+        //static string connection_string = @"Data Source=LENOVO-YOGA-520;Initial Catalog=QLBH;User ID=sa;Password=123;Integrated Security=True";
         //static string connection_string = @"Data Source=DESKTOP-CR27SAG;Initial Catalog=QLBH;Integrated Security=True";
         public SqlConnection connection;
 

@@ -62,7 +62,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(attrib));
         }
 
-        public int Receive;
+        public int Receive { get; set; }
         public int Change
         {
             get

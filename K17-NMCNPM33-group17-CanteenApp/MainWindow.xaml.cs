@@ -539,6 +539,10 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 cmd.ExecuteNonQuery();
             }
             MessageBox.Show("Order lưu thành công");
+
+            currentOrder.Notify("Change");
+            currentOrder.Notify("OrderSum");
+            currentOrder.Notify("Quantity");
             db.connection.Close();
             orderSaved = true;
         }
@@ -565,6 +569,8 @@ namespace K17_NMCNPM33_group17_CanteenApp
             ChangeBinding.Source = currentOrder;
             // Bind the new data source to the myText TextBlock control's Text dependency property.
             changeAmount.SetBinding(TextBlock.TextProperty, ChangeBinding);
+
+            receivedAmount.Text = "";
 
             Binding QuantityBinding = new Binding("Quantity");
             QuantityBinding.Source = currentOrder;
