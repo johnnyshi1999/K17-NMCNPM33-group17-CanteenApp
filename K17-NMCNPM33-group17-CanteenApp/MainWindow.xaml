@@ -315,7 +315,7 @@
                                 >
                             <Canvas x:Name="FastSearch">
                                 <TextBlock Text="Tìm kiếm" Style="{DynamicResource MediumText}"
-                                           Canvas.Left="12" Canvas.Top="7"/>
+                                           Canvas.Left="12" Canvas.Top="7" />
                                 <Border Canvas.Left="15" Canvas.Top="44"
                                         Width="445" Height="60"
                                         BorderBrush="Black" BorderThickness="1">

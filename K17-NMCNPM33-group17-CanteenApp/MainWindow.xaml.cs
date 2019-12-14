@@ -829,6 +829,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 TextBlock orderID = new TextBlock();
                 orderID.Text = StatisticList[i].OrderID.ToString();
                 orderID.Style = Resources["SmallText"] as Style;
+                orderID.MouseUp += OrderDetail_MouseUp;
 
                 statisticList.Children.Add(orderID);
 
@@ -836,6 +837,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 Grid.SetColumn(orderID, 0);
 
                 TextBlock employee = new TextBlock();
+                //employee.MouseUp += OrderDetail_MouseUp;
                 employee.Text = StatisticList[i].Employee;
                 employee.Style = Resources["SmallText"] as Style;
                
@@ -849,6 +851,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 oderSum.Text = ordersum[i].ToString();
                 Debug.WriteLine(StatisticList[i].OrderSum);
                 oderSum.Style = Resources["SmallText"] as Style;
+                //oderSum.MouseUp += OrderDetail_MouseUp;
 
                 statisticList.Children.Add(oderSum);
 
@@ -892,6 +895,54 @@ namespace K17_NMCNPM33_group17_CanteenApp
         private void PrintBill_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Order đã được in!!!");
+        }
+
+        private void OrderDetail_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            TextBlock selected = sender as TextBlock;
+            string orderID = selected.Text;
+
+            db = DatabaseHandler.getInstance();
+
+            db.connection.Open();
+
+            StatisticList = new List<Order>();
+
+            SqlCommand cmd = new SqlCommand("SP_ChiTietDonHang", db.connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", SqlDbType.Char).Value = orderID;
+
+            SqlDataReader dr = cmd.ExecuteReader();
+            DataTable dts = new DataTable();
+            dts.Load(dr);
+
+            showOrderDetail(dts);
+
+            db.connection.Close();
+        }
+
+        private void showOrderDetail(DataTable dts)
+        {
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < dts.Rows.Count; i++)
+            {
+                string id = dts.Rows[i][0].ToString();
+                string name = dts.Rows[i][1].ToString();
+                string quantity = dts.Rows[i][2].ToString();
+                string price = dts.Rows[i][3].ToString();
+                result.Append(id);
+                result.Append(" - ");
+                result.Append(name);
+                result.Append(" - ");
+                result.Append(quantity);
+                result.Append("x" + price);
+                result.Append(" - Tổng tiền : ");
+                int qtt = int.Parse(quantity);
+                int prc = int.Parse(price);
+                result.Append($"{qtt*prc}");
+                result.Append("\n");
+            }
+            MessageBox.Show(result.ToString(),"Chi tiết đơn hàng");
         }
     }
 }
