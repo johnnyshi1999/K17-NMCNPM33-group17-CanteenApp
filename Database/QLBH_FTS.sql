@@ -1,5 +1,9 @@
 ﻿use QLBH
 
+IF OBJECT_ID ('non_unicode_convert')
+IS NOT NULL
+DROP PROCEDURE non_unicode_convert
+GO
 CREATE FUNCTION non_unicode_convert(@inputVar NVARCHAR(MAX))
 RETURNS NVARCHAR(MAX)
 AS
@@ -61,6 +65,10 @@ INSERT [dbo].[SANPHAM_KODAU] ([MaSP], [TenSP]) VALUES (N'PHO001', 'Pho Bo')
 INSERT [dbo].[SANPHAM_KODAU] ([MaSP], [TenSP]) VALUES (N'PHO002', 'Pho Ga')
 INSERT [dbo].[SANPHAM_KODAU] ([MaSP], [TenSP]) VALUES (N'SUA001', 'Sua Long Thanh')
 
+IF OBJECT_ID ('trgSANPHAM')
+IS NOT NULL
+DROP PROCEDURE trgSANPHAM
+GO
 CREATE TRIGGER trgSANPHAM
 ON SANPHAM
 FOR INSERT, UPDATE, DELETE
@@ -76,6 +84,10 @@ BEGIN
 	
 END
 
+IF OBJECT_ID ('FT_DSTenSP_non_unicode')
+IS NOT NULL
+DROP PROCEDURE FT_DSTenSP_non_unicode
+GO
 CREATE FUNCTION FT_DSTenSP_non_unicode ()
 RETURNS table
 AS
@@ -83,6 +95,10 @@ AS
 	(SELECT SANPHAM.MaSP, dbo.non_unicode_convert(SANPHAM.TenSP) as TenSP
 	FROM SANPHAM)
 
+IF OBJECT_ID ('FT_DanhSachSP')
+IS NOT NULL
+DROP PROCEDURE FT_DanhSachSP
+GO
 CREATE FUNCTION FT_DanhSachSP ()
 RETURNS table
 AS
@@ -112,7 +128,10 @@ with change_tracking auto;
 --select * from freetexttable(SANPHAM, TenSP, 'Bò') as t
 --join dbo.FT_DanhSachSP() sp on t.[key] = sp.MaSP
 
-
+IF OBJECT_ID ('SP_TimKiemSP')
+IS NOT NULL
+DROP PROCEDURE SP_TimKiemSP
+GO
 CREATE PROCEDURE SP_TimKiemSP @str_query nvarchar(100)
 as
 	DECLARE @nonUnicode VARCHAR(100)
@@ -122,7 +141,8 @@ as
 	ON (dssp.MaSP = spkd.MaSP)
 	WHERE FREETEXT(spkd.TenSP, @nonUnicode)
 
-EXEC dbo.SP_TimKiemSP 'che thap cam'
+-- testing
+EXEC dbo.SP_TimKiemSP 'lay''s'
 select * from dbo.FT_DanhSachSP()
 
 EXEC dbo.SP_DanhSachSP

@@ -494,7 +494,7 @@
                                     <TextBox FontSize="32" Name="statisticDate" Text="{Binding Path=DateTimeValue, StringFormat=dd-MM-yyyy}" Height="52" Width="411" Canvas.Left="519" Canvas.Top="38" />
                                     <Button x:Name="SearchStatisticButton" Style="{DynamicResource BlueFormatButton}"
                                         Width="62" Height="60" RenderTransformOrigin="6.126,1.348"
-                                        Canvas.Left="954" Canvas.Top="30" Click="SearchStatisticButton_Click">
+                                        Canvas.Left="954" Canvas.Top="30" Click="SearchStatisticButton_Click" IsDefault="True">
                                         <StackPanel Orientation="Horizontal">
                                             <Image Source="Images/search-product.png" Margin="5"
                                                RenderOptions.BitmapScalingMode="Fant"/>
@@ -531,7 +531,7 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="2*" />
                                             <ColumnDefinition Width="2*" />
-                                            <ColumnDefinition Width="3*" />
+                                            <ColumnDefinition Width="2*" />
                                             <ColumnDefinition Width="3*" />
                                         </Grid.ColumnDefinitions>
                                         <Border BorderBrush="Black" BorderThickness="0,0,1,1" Grid.Column="0">
@@ -563,7 +563,7 @@
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="2*" />
                                                 <ColumnDefinition Width="2*" />
-                                                <ColumnDefinition Width="3*" />
+                                                <ColumnDefinition Width="2*" />
                                                 <ColumnDefinition Width="3*" />
                                             </Grid.ColumnDefinitions>
 

@@ -776,6 +776,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
             RegexOptions options = RegexOptions.Multiline | RegexOptions.IgnoreCase;
             string pattern = statisticDate.Text;
 
+            List<int> ordersum = new List<int>();
 
             int sum = 0;
             for (int i = 0; i < dts.Rows.Count; i++)
@@ -787,22 +788,37 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 if (Regex.IsMatch(src, pattern, options))
                 {
                     sum += int.Parse(dts.Rows[i][4].ToString());
+                    ordersum.Add(int.Parse(dts.Rows[i][4].ToString()));
+
                     Order order = new Order()
                     {
                         OrderID = dts.Rows[i][0].ToString(),
                         TimeCreated = (DateTime)dts.Rows[i][2],
                         Employee = dts.Rows[i][3].ToString(),
-                        orderSum = int.Parse(dts.Rows[i][4].ToString()),
                        
+                    };
+                    StatisticList.Add(order);
+                }
+                else if(statisticDate.Text == null)
+                {
+                    sum += int.Parse(dts.Rows[i][4].ToString());
+                    ordersum.Add(int.Parse(dts.Rows[i][4].ToString()));
+
+                    Order order = new Order()
+                    {
+                        OrderID = dts.Rows[i][0].ToString(),
+                        TimeCreated = (DateTime)dts.Rows[i][2],
+                        Employee = dts.Rows[i][3].ToString(),
+
                     };
                     StatisticList.Add(order);
                 }
             }
             totalSumStatistic.Text = sum.ToString();
           
-            loadStatisticListIntoGrid();
+            loadStatisticListIntoGrid(ordersum);
         }
-        private void loadStatisticListIntoGrid()
+        private void loadStatisticListIntoGrid(List<int> ordersum)
         {
 
             statisticList.Children.Clear();
@@ -830,7 +846,7 @@ namespace K17_NMCNPM33_group17_CanteenApp
                 Grid.SetColumn(employee, 1);
 
                 TextBlock oderSum = new TextBlock();
-                oderSum.Text = StatisticList[i].OrderSum.ToString();
+                oderSum.Text = ordersum[i].ToString();
                 Debug.WriteLine(StatisticList[i].OrderSum);
                 oderSum.Style = Resources["SmallText"] as Style;
 
