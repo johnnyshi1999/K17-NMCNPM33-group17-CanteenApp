@@ -195,7 +195,9 @@ DROP PROCEDURE SP_ChiTietDonHang
 GO
 CREATE PROCEDURE SP_ChiTietDonHang @id char(6)
 AS
-	SELECT sp.TenSP, dhsp.SoLuong, dhsp.GiaBan
+	SELECT dhsp.MaDH, sp.TenSP, dhsp.SoLuong, dhsp.GiaBan
 	FROM dbo.DONHANG_SP dhsp JOIN dbo.SANPHAM sp on
 		dhsp.MaSP = sp.MaSP
 	WHERE @id = dhsp.MaDH
+
+exec SP_ChiTietDonHang '14121'

@@ -146,3 +146,5 @@ EXEC dbo.SP_TimKiemSP 'lay''s'
 select * from dbo.FT_DanhSachSP()
 
 EXEC dbo.SP_DanhSachSP
+
+EXEC dbo.SP_DanhSachDonHang
